@@ -9,4 +9,12 @@ menu:
             icon: home
 ---
 
-# Strona główna
+# Dzień dobry
+
+Jestem asystentem badawczo dydaktycznym na Katedrze Informatyki Wydziału Informatyki i Telekomunikacji Politechniki Krakowskiej.
+
+{{< space 10 >}}
+
+## Konsultacje kontakt
+
+Informacje znajdziesz [tutaj](/kontakt/)

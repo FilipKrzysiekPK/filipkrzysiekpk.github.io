@@ -1,4 +1,5 @@
-baseURL = 'https://ii.pk.edu.pl/~kswaldek/out'
+# baseURL = 'https://ii.pk.edu.pl/~kswaldek/out'
+baseURL = 'https://filipkrzysiekpk.github.io/'
 languageCode = 'pl-pl'
 title = 'Krzysztof Swałdek'
 theme = 'stack'
