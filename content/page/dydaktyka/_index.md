@@ -12,6 +12,10 @@ menu:
 
 # Dydaktyka
 
+## Wprowadzenie do git - a
+
+[Otwórz](/page/materials/git)
+
 ## Simple Exam Browser
 
 [Pobierz](https://ii.pk.edu.pl/~kswaldek/media/files/SimpleExamBrowser.zip)
