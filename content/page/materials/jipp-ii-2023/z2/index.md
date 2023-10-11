@@ -1,6 +1,7 @@
 ---
 title: "Laboratorium 1"
 layout: singleNoHeader
+date: 2023-10-10
 ---
 
 

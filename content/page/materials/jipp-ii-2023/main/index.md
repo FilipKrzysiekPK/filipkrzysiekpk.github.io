@@ -9,7 +9,8 @@ date: 2023-10-05
 ### Przydatne materiały
 
 * [Wprowadzenie do git-a](/page/materials/git)
-* [Kurs na Delcie](#)
+* [Kurs na Delcie](https://delta.pk.edu.pl/course/view.php?id=4503)
+* [Środowiska programistyczne](/page/materials/resources)
 
 {{< space 5 >}}
 
@@ -24,5 +25,5 @@ date: 2023-10-05
 |  Nr   |    Data    |            Tematyka             |               Materiały               |
 | :---: | :--------: | :-----------------------------: | :-----------------------------------: |
 |   1   | 04.10.2023 |      Zajęcia organizacyjne      |                                       |
-|   2   | 11.10.2023 | CMake, git, wprowadzenie do c++ | [📄🔗](/page/materials/jipp-ii-2023/z1) |
+|   2   | 11.10.2023 | CMake, git, wprowadzenie do c++ | [📄🔗](/page/materials/jipp-ii-2023/z2) |
 
