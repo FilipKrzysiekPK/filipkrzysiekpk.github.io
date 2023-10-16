@@ -26,10 +26,10 @@ Pierwszym najbardziej wiarygodnym źródłem są książki, gdzie warto wyróżn
 - *C++ Podróż po języku dla zaawansowanych Wydanie II* [Stroustrup, 2018] - Autor sugeruje, aby zapoznać się z poprzednią pozycją, ale i tak temat jest omawiany od podstaw. Na pewno warto wiedzieć o tej książce w formie źródła, gdzie poszukać informacji o konkretnych rzeczach.
 
 Źródła internetowe i dokumentacje:
-- [Serwis programistyczny c++](https://cpp0x.pl/){target="_blank"}
-- [Dokumentacja c++ (najbardziej oficjalna)](https://en.cppreference.com/w/){target="_blank"}
-- [Dokumentacja c++ Microsoft](https://learn.microsoft.com/en-us/cpp/?view=msvc-170){target="_blank"}
-- [ISO c++](https://isocpp.org/){target="_blank"}
+- [Serwis programistyczny c++](https://cpp0x.pl/)
+- [Dokumentacja c++ (najbardziej oficjalna)](https://en.cppreference.com/w/)
+- [Dokumentacja c++ Microsoft](https://learn.microsoft.com/en-us/cpp/?view=msvc-170)
+- [ISO c++](https://isocpp.org/)
 
 {{< space 5 >}}
 
@@ -56,7 +56,7 @@ Powyższa struktura trzyma pliki nagłówkowe i źródłowe razem, jednakże odd
 Porównania plików `main` dokonamy na najprostszym programie `Hello world!`. Przypomnijmy sobie, jak to wyglądało w c:
 
 ```c
-#include &lt;stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -69,7 +69,7 @@ int main()
 Natomiast w c++ napiszemy to w taki sposób:
 
 ```cpp
-#include &lt;iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -80,7 +80,7 @@ int main() {
 ```
 (kod omówiony na zajęciach)
 
-**Czy jest różnica pomiędzy `#include "iostream"`, a `#include &lt;iostream>`?**
+**Czy jest różnica pomiędzy `#include "iostream"`, a `#include <iostream>`?**
 {{< br >}}
 Jeżeli użyjemy cudzysłowów, będziemy wyszukiwać plików do załączenia w bieżącym katalogu, bądź względem pliku, w którym załączamy. Jednakże w przypadku użycia znaków mniejszości i większości, będziemy wyszukiwać w standardowym miejscu bibliotek.
 

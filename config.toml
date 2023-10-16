@@ -6,6 +6,11 @@ theme = 'stack'
 
 defaultContentLanguage = "pl"
 
+[markup]
+  [markup.highlight]
+    noClasses = false
+
+
 [deployment]
 
 [[deployment.targets]]

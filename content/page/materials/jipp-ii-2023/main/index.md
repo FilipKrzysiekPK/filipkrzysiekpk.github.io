@@ -26,4 +26,5 @@ date: 2023-10-05
 | :---: | :--------: | :-----------------------------: | :-----------------------------------: |
 |   1   | 04.10.2023 |      Zajęcia organizacyjne      |                                       |
 |   2   | 11.10.2023 | CMake, git, wprowadzenie do c++ | [📄🔗](/page/materials/jipp-ii-2023/z2) |
+|   2   | 18.10.2023 | Parametry domyślne, przeciążenia funkcji, wstęp do obiektowości | [📄🔗](/page/materials/jipp-ii-2023/z3) |
 
