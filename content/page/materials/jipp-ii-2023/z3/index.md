@@ -51,13 +51,13 @@ int main() {
 Kontener `vector` jest jednym z najczęściej stosowanych. Jego przewaga nad `array`, to dynamiczne dostosowywanie rozmiarów.
 
 ```cpp
-#include &lt;vector>
-#include &lt;iostream>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
 int main() {
-    vector &lt;int> myVector;      //Deklaracja vectora, który będzie przechowywał int
+    vector <int> myVector;      //Deklaracja vectora, który będzie przechowywał int
     myVector.pushBack(5);       //Dodawanie elementu na koniec vectora
     myVector.pushBack(6);
     myVector.pushBack(15);
