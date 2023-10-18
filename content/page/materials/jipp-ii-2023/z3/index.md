@@ -10,6 +10,7 @@ date: 2023-10-10
 ### Cele laboratorium i poruszane zagadnienia
 
 * Poznanie najprostszego kontenera
+* Poznanie kolejnych udogodnień c++
 * Parametry domyślne
 * Przeciążenia
 * Poznanie celu obiektowości
@@ -27,8 +28,8 @@ Kontener `array` jest najprostszym z nich, posiada on stały rozmiar, który def
 [Dokumentacja](https://en.cppreference.com/w/cpp/container/array)
 
 ```cpp
-#include &lt;array>
-#include &lt;iostream>
+#include <array>
+#include <iostream>
 
 using namespace std;
 
@@ -45,9 +46,82 @@ int main() {
 }
 ```
 
+{{< space 3 >}}
+
+Kontener `vector` jest jednym z najczęściej stosowanych. Jego przewaga nad `array`, to dynamiczne dostosowywanie rozmiarów.
+
+```cpp
+#include &lt;vector>
+#include &lt;iostream>
+
+using namespace std;
+
+int main() {
+    vector &lt;int> myVector;      //Deklaracja vectora, który będzie przechowywał int
+    myVector.pushBack(5);       //Dodawanie elementu na koniec vectora
+    myVector.pushBack(6);
+    myVector.pushBack(15);
+
+    cout << myVector[1] << endl;    //Wypisywanie zawartości pod pierwszym indekdem wektora
+
+    return 0;
+}
+```
+
 [Dokumentacja dla kontenerów](https://en.cppreference.com/w/cpp/container)
 
-<br>
+{{< space 4 >}}
+
+## Kolejne udogodnienia c++
+
+Czy zawsze musimy deklarować jakiego typu jest nasza zmienna? Poniekąd tak, poniekąd nie. C++ 11 wprowadza typ zastępczy `auto`, dokonuje on dedukcji typu na podstawie przypisywanej do niej wartości. Dlaczego i poco w języku silnie typowanym stworzono typ dedukowany? Odpowiedź jest prozaiczna, aby nie musieć tyle pisać i ułatwić sobie życie. W większości przypadków nie będziemy z nich korzystać przy typach prostych. Zazwyczaj będziemy sobie upraszczać życie, przy alokacji pamięci, czy też przechwytywaniu typu ze zwracanej funkcji.
+
+Załóżmy poniekąd absurdalny przypadek. Chcemy stworzyć wskaźnik na kontener `array`. Aby tego dokonać musielibyśmy zrobić to w następujący sposób:
+```cpp
+std::array<int, 50> *tab = new std::array<int, 50>();
+```
+
+Używając słowa kluczowego `auto` możemy uniknąć powtarzania pisania tego samego:
+```cpp
+auto *tab = new std::array<int, 50>();
+```
+
+Kolejny bardzo częsty sposób wykorzystania za chwilę.
+
+{{< space 3 >}}
+
+Kolejną nowością jest range-based for loop, czyli pętla for bazująca na zakresie. Skraca ona znacznie zapis samej pętli i sposób dostępu do poszczególnych elementów. Korzystając z kontenerów będziemy dostawać dostęp do elementów za pomocą iteratorów. O takich szczegółach będziemy mówić na dalszych zajęciach, póki co skupmy się na samej pętli i tym, jak może nam ułatwić życie.
+
+Bardzo ważna różnica względem zwykłego fora, to tutaj nie tworzymy zmiennej, aby dostawać się do wartości pod poszczególnymi indeksami, tutaj dostajemy konkretnie te elementy. Spójrzmy na pierwszy przykład:
+
+```cpp
+for (int i : {1, 2, 3}) {
+    cout << i << "\t";
+}
+```
+
+Był to zdecydowanie najprostszy przypadek takiej pętli. Znacznie ciekawszy jest bazujący na kontenerach, albo stringu:
+
+```cpp
+string myText = "Hello World or studenciaki";
+for (auto ch: myText) {
+    cout << ch << "\t";
+}
+```
+Czy to można jeszcze ulepszyć? Oczywiście, że tak, wystarczy wykorzystać referencję, mamy wtedy możliwość modyfikowania bazowego stringa i oczywiście nasz kod działa optymalniej.
+
+```cpp
+string myText = "Hello World or studenciaki";
+for (auto &ch: myText) {
+    cout << ch << "\t";
+}
+```
+
+Właśnie to jest przykład, gdzie będziemy najczęściej wykorzystywać dedukcję typu.
+
+Bardzo ważne pytanie, czy zawsze będziemy mogli/będzie zasadne użycie range-based for?
+
+{{< space 3 >}}
 
 Inne udogodnienia, o których warto wiedzieć, że istnieją:
 
@@ -56,7 +130,7 @@ Inne udogodnienia, o których warto wiedzieć, że istnieją:
 * [prosta wielowątkowość](https://en.cppreference.com/w/cpp/thread/thread)
 * [filesystem operacje na systemie plikowym](https://en.cppreference.com/w/cpp/filesystem)
 
-<br><br><br>
+{{< space 7 >}}
 
 ## Parametry domyślne funkcji
 
@@ -121,7 +195,7 @@ void fun(tab[3][5]);
 ```
 prawidłowo deklaruje dwie przeciążone funkcje `fun`, gdyż tablice wielowymiarowe różniące się wymiarem innym niż pierwszy są różnych typów i pomiędzy tymi typami nie ma niejawnej konwersji.
 
-<br><br><br>
+{{< space 7 >}}
 
 ## Obiektowość
 
