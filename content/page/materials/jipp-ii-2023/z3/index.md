@@ -275,9 +275,9 @@ public:
     char tablica[20]; //prawo dostępu: publiczne
     
 private:
-    int abc; //prawo dostępu: prytatne
-    char znak; //prawo dostępu: prytatne
-    std::string napis; //prawo dostępu: prytatne
+    int abc; //prawo dostępu: prywatne
+    char znak; //prawo dostępu: prywatne
+    std::string napis; //prawo dostępu: prywatne
 };
 
 int main()
