@@ -15,7 +15,6 @@ date: 2023-10-10
 * Przeciążenia
 * Poznanie celu obiektowości
 * Porównanie struktury z klasą
-* Co to są i po co się stosuje gettery oraz settery
 
 {{< space 7 >}}
 
