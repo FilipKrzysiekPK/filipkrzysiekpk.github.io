@@ -222,10 +222,10 @@ Zasady tworzenia destruktora są podobne do konstruktora. Nazwa destruktora zacz
 Zanim zaczniemy omawiać tematykę konstruktorów kopiujących przetestujmy działanie kodu znajdującego
 się [tutaj](Examples/E1NoCopyingConstructor).
 
-Jakie anomalie zauważyłeś?{{< rawhtml >}}<sup id="answear1Sourece">[1](#answear1)</sup>{{< /rawhtml >}}
+Jakie anomalie zauważyłeś?{{< rawhtml >}}<sup id="answear1Sourece">{{< /rawhtml >}}[1](#answear1){{< rawhtml >}}</sup>{{< /rawhtml >}}
 
 Dodaj destruktor, który będzie zwalniał pamięć (dla `x` i `y`). Co się stało? Czy program działa poprawnie i
-dlaczego?{{< rawhtml >}}<sup id="answear2Sourece">[2](#answear2)</sup>{{< /rawhtml >}}
+dlaczego?{{< rawhtml >}}<sup id="answear2Sourece">{{< /rawhtml >}}[2](#answear2){{< rawhtml >}}</sup>{{< /rawhtml >}}
 
 ### Deklaracja
 
