@@ -289,12 +289,20 @@ Popraw implementację z przykładu (folder examples).
 
 **Zadanie 2**
 
-1. Stwórz klasę `Point`, która będzie przechowywać informacje o punkcie. Dodaj do niego odpowiednie metody.
+1. Stwórz klasę `Point`, która będzie przechowywać informacje o punkcie w typie `int`. Dodaj do niego odpowiednie metody oraz konstruktory.
 2. Stwórz klasę `Polygon`, która będzie w konstruktorze przyjmować wartość z ilu punktów się składa. Do jej implementacji użyj tablicy dynamicznie alokowanej, a nie kontenerów (trzeba to przećwiczyć i zasadę RAII).
 3. Dodaj metody:
 * przypisująca poszczególnym punktom ich wartości
 * obliczająca obwód
 4. Dodaj konstruktor kopiujący.
+
+**Zadanie 3**
+
+Stwórz klasę przechowującą długość i szerokość geograficzną (`double`). Stwórz odpowiednie metody i konstruktory. Dodatkowo stwórz metody pozwalające pobierać i zapisywać te wartości w innym formacie.
+
+Przyjmując, że `int number` to długość w innym formacie, musimy użyć następującego wzoru, aby uzyskać w zapisie dziesiętnym stopnie:
+
+deg = number / 3600000
 
 
 
