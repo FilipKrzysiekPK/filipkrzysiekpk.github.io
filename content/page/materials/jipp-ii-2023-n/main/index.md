@@ -8,7 +8,7 @@ date: 2023-10-20
 
 ### Przydatne materiały
 
-* [Kurs na Delcie]()
+* [Kurs na Delcie](https://delta.pk.edu.pl/course/view.php?id=4682)
 * [Środowiska programistyczne](/page/materials/resources)
 
 {{< space 5 >}}
@@ -23,7 +23,8 @@ date: 2023-10-20
 
 |  Nr   |    Data    |            Tematyka             |               Materiały               |
 | :---: | :--------: | :-----------------------------: | :-----------------------------------: |
-|   1   | 21.10.2023 |      Zajęcia organizacyjne      | [📄🔗](/page/materials/jipp-ii-2023-n/z1) |
+|   1   | 21.10.2023 |      Zajęcia organizacyjne, różnice pomiędzy c i c++, alokacja pamięci, CMake, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII      | [📄🔗](/page/materials/jipp-ii-2023-n/z1) |
+|   1   | 29.10.2023 |      Konstruktory kopiujące, dziedziczenie, polimorfizm, metody wirtualne      | [📄🔗](/page/materials/jipp-ii-2023-n/z2) |
 
 
 {{< space 5 >}}
