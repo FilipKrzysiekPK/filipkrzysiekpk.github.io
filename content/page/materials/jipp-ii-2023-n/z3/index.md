@@ -287,4 +287,107 @@ int main() {
 8. Stwórz operator `+` oraz `+=`.
 
 
+{{< space 7 >}}
+
+## Wyrażenia lambda
+
+Wyrażenie lambda można określić, jako lokalna funkcja pomocnicza. Pozwala ona na oczyszczenie kodu z funkcji, które są bardzo krótkie i są wykorzystywane tylko i wyłącznie w jednym miejscu.
+
+Dodatkowym atutem jest dość łatwe zapisanie ich w zmiennych, lecz funkcje też da się przypisać do zmiennej, chociaż trzeba nieco więcej pokombinować.
+
+```cpp
+cout << [](int a, int b) -> int {
+    if ( a > b )
+        return a;
+
+    return b;
+} (10, 15) << endl;
+```
+
+Powyżej możemy zauważyć bardzo prosty przykład takiej funkcji. Składa się ona z:
+
+* `[]` - oznaczają one początek wyrażenia lambda i definiują przechwytywane nazwy (captures)
+* `()` - lista parametrów, analogicznie jak w funkcji (opcjonalne)
+* atrybuty - pomijamy
+* `-> T` - typ zwracany przez wyrażenie lambda (opcjonalne)
+* `{}` - ciało wyrażenia lambda, które jest analogiczne do funkcji
+
+
+`()` - nawiasy na końcu służą do wywołania wyrażenia, nie są jego częścią!
+
+Jeżeli nie określimy zwracanego typu, kompilator dedukuje sam, jaki typ jest zwracany. Spójrzmy na poniższy kod.
+
+```cpp
+cout << [](int a, int b) {
+    if ( a > b )
+        return a;
+
+    return b * 1.0;
+} (10, 15) << endl;
+```
+
+Nie ma wyspecyfikowanego typu zwracanego, a zwracane są 2 różne typy. Skończyło się to zwróceniem błędu kompilacji:
+
+```console
+main.cpp: In lambda function:
+main.cpp:30:16: error: inconsistent types ‘int’ and ‘double’ deduced for lambda return type
+   30 |     return b * 1.0;
+      |                ^~~
+```
+
+Jeżeli dodamy deklarację zwracanego typu, wtedy kod się poprawnie skompiluje i zwróci wartość.
+
+{{< space 4 >}}
+
+### Przechwytywanie nazw (captures)
+
+Przechwytywanie nazw, a raczej przekazywanie zmiennych do wyrażenia lambda. Pozwala ono przekazać zadeklarowaną wcześniej zmienną przekazać do wyrażenia lambda. Możemy tego dokonać na 2 sposoby, przekazując przez wartość, albo referencję.
+
+```cpp
+int main() {
+    int a = 0;
+    int b = 4;
+
+    cout << [a, b] { return a + b }() << endl;
+
+    return 0;
+}
+```
+
+Jeżeli chcemy przekazać wszystkie zmienne, to możemy użyć:
+
+* `[=]` - przekaż wszystko przez wartość
+* `[&]` - przekaż wszystko przez referencję
+
+Oczywiście o wiele lepiej jest wymieniać wszystkie zmienne, które chcemy tak przekazać, ponieważ zwiększa to czytelność i intencje. 
+
+Warto jeszcze wspomnieć, że przy przekazywaniu wszystkiego możemy wyspecyfikować, że któryś element ma zostać przekazany w inny sposób:
+
+* `[=, &a]` - przekaż wszystko przez wartość, ale a przez referencję
+* `[&, a]` - przekaż wszystko przez referencję, ale a przez wartość
+
+{{< space 2 >}}
+
+### Przekazywanie wyrażeń lambda
+
+Jak już wcześniej było wspomniane, wyrażenie lambda możemy zapisać do zmiennej. Zapewne użyjemy wtedy słowa kluczowego `auto`, ponieważ nie będziemy musieli się męczyć z jego definiowaniem. Jednakże tworząc deklarację funkcji, już tak postąpić nie możemy. Aby móc z tego korzystać, musimy załączyć bibliotekę `functional`.
+
+```cpp
+void fun(function&lt;int( int )> f, int n) {
+    cout << f(n) << endl;
+}
+
+int main() {
+    fun([]( int x ) { return x; }, 5);
+    fun([]( int x ) { return x * x; }, 5);
+    return 0;
+}
+```
+
+{{< space 2 >}}
+
+### Kiedy ich używać, jest to w ogóle potrzebne?
+
+Najlepszym przykładem, kiedy używać, jest funkcja z biblioteki standardowej `sort`, która jako ostatni argument przyjmuje funkcję, albo wyrażenie lambda. Pozwala nam to wtedy nie definiować dodatkowej funkcji potrzebnej tylko i wyłącznie dla zdefiniowania, który obiekt ma się znaleźć po prawej, a który po lewej stronie. Dodatkowo w takim przypadku bez definiowania operatorów można posortować zadeklarowane klasy według własnego konceptu.
+
 
