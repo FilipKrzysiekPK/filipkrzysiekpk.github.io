@@ -10,7 +10,7 @@ date: 2023-10-05
 
 * [Wprowadzenie do git-a](/page/materials/git)
 * [Kurs na Delcie](https://delta.pk.edu.pl/course/view.php?id=4503)
-* [Środowiska programistyczne](/page/materials/resources)
+* [Środowiska programistyczne](/page/materials/jipp-ii-2023/resources)
 
 {{< space 5 >}}
 
@@ -30,4 +30,5 @@ date: 2023-10-05
 |   4   | 25.10.2023 | Konstruktory, destruktory, konstruktory kopiujące, RAII | [📄🔗](/page/materials/jipp-ii-2023/z4) |
 |   5   | 08.11.2023 | Dziedziczeni i polimorfizm | [📄🔗](/page/materials/jipp-ii-2023/z5) |
 |   6   | 15.11.2023 | Funkcje inline i zaprzyjaźnione, operatory | [📄🔗](/page/materials/jipp-ii-2023/z6) |
+|   7   | 15.11.2023 | Operator przypisania, funkcje lambda, static, konwersje typów | [📄🔗](/page/materials/jipp-ii-2023/z7) |
 
