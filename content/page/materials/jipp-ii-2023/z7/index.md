@@ -580,7 +580,7 @@ W funkcji `saveSomeValues` tworzymy strukturę i przypisujemy do nich wartości.
    * `getShort` - pobieranie wartości, jako short
    * `getUnsigned` - pobieranie wartości, jako unsigned
    * analogiczne settery
-    Zadaniem klasy jest możliwość przechowywania różnych typów zmiennych. Do zapisu danych w klasie należy użyć jednego pola.
+  Zadaniem klasy jest możliwość przechowywania różnych typów zmiennych. Do zapisu danych w klasie należy użyć jednego pola. Nie można konwertować typow p(int -> double itp), należy uży `reinterpret_cast`.
 
 
 
