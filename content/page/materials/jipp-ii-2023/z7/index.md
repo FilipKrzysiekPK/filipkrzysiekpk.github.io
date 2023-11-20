@@ -1,7 +1,7 @@
 ---
-title: "Laboratorium 5"
+title: "Laboratorium 7"
 layout: singleNoHeader
-date: 2023-11-11
+date: 2023-11-20
 ---
 
 
@@ -10,6 +10,11 @@ date: 2023-11-11
 ### Cele laboratorium i poruszane zagadnienia
 
 * Operator przypisania
+* Zmienne statyczne
+* Metody statyczne
+* Wyrażenia lambda
+* Typ wyliczeniowy
+* Konwersja typów
 
 
 {{< space 7 >}}
@@ -484,6 +489,28 @@ int main() {
 Po uruchomieniu tego programu możemy zauważyć, że Na początku wypisze się nam wartość 100, a w drugim przypadku litera `d`, która odpowiada wartości 100 w tablicy asci. Zapis binarny obydwóch wartości jest taki sam.
 
 Jak to zadziałało? Została dokonana konwersja wskaźnika, zamiast inetrpretować `int`, teraz zaczęliśmy go uznawać, jako `char`. Czyli nie zmieniamy postaci danych, tylko i wyłącznie zmieniamy sposób ich interpretowania.
+
+Pamiętając (albo sprawdzając [dokumentację](https://en.cppreference.com/w/cpp/language/types)) wiemy, że `int` ma 16/32 bity, a `char` 8, co oznacza, że w jednym `int` zmieścimy 4 `char`. Używając przesunięcia bitowego dodajmy do zmiennej int znak z tabeli ASCI o numerze 103, a następnie wypiszmy te dane.
+
+```cpp
+#include <bitset>
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int a = 100 + (103 << 8);
+    char *p1 = reinterpret_cast <char*>(&a);
+
+    cout << a << "\t" << bitset<16>(a) << endl;
+    cout << *p1 << "\t" << bitset<16>(*p1) << endl;
+    cout << *(p1 + 1) << "\t" << bitset<16>(*(p1 + 1)) << endl;
+
+    return 0;
+}
+```
+
+`bitset` słuzy do wypisywania w binarnej postaci przekazanych elementów.
 
 Rozważmy jeszcze jeden przykład, który nam pokaże przykładowe zastosowanie.
 
