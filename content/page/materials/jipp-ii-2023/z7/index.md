@@ -1,5 +1,5 @@
 ---
-title: "Laboratorium 7"
+title: "Laboratorium 6"
 layout: singleNoHeader
 date: 2023-11-20
 ---
