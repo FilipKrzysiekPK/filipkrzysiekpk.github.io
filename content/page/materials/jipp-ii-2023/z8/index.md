@@ -187,7 +187,7 @@ int main() {
     int a;
     cin >> a;
     if (cin.fail()) 
-        cout << "Nie wiesz co to liczba całkowita jest!?" << endl;
+        cout << "Nie wiesz co to jest liczba całkowita!?" << endl;
     else
         cout << "Twoja liczba to: " << a << endl;
     return 0;
@@ -195,7 +195,9 @@ int main() {
 ```
 *Najszybciej przetestujesz tego działanie [tutaj](https://www.onlinegdb.com/)*
 
-Jak zapewne zauważyliście, pozwala to w jakimś stopniu sprawdzić, czy wszystko jest poprawne, ale nie daje całkowitej pewności. Spójrzmy jednak na to, co jest najważniejsze w tym przykładzie. Wywołując metodę na `cin` zwracany jest nam status, czy wszystki jest poprawnie (z jego punktu widzenia), czyli pierwszy sposób wykrywania błędów.
+Jak zapewne zauważyliście, pozwala to w jakimś stopniu sprawdzić, czy wszystko jest poprawne, ale nie daje całkowitej pewności. Spójrzmy jednak na to, co jest najważniejsze w tym przykładzie. Wywołując metodę na `cin` zwracany jest nam status, czy wszystko jest poprawnie (z jego punktu widzenia), czyli pierwszy sposób wykrywania błędów.
+
+Warto dodać, że flaga `fail` będzie podniesiona, dopóki jej nie opuścimy. W przypadku `cin` należy jeszcze wyczyścić bufor, ponieważ on będzie przechowywać kolejne dane czekające na wprowadzenie.
 
 {{< space 4 >}}
 
@@ -205,7 +207,7 @@ Kolejnym sposobem są wyjątki, o których już zapewne mogliśmy się dowiedzie
 
 ```cpp
 int main() {   
-    vector&lt;int> v;
+    vector<int> v;
     cout <<"V: " << v.at(100) << endl; 
     return 0;
 }
@@ -222,7 +224,7 @@ Mamy szczęście został rzucony wyjątek i program się zakończył z poinformo
 
 ```cpp
 int main() {
-    vector&lt;int> v;
+    vector<int> v;
     
     try{
         cout <<"V: " << v.at(100) << endl; 
@@ -240,7 +242,7 @@ Co w przypadku, jeżeli nasza aplikacja może wyrzucić więcej wyjątków? Moż
 
 ```cpp
 int main() {
-    vector&lt;int> v;
+    vector<int> v;
     
     try{
         v.resize(10000);
@@ -292,6 +294,8 @@ int main() {
 }
 ```
 
+Należy dodać, że zazwyczaj nie robimy `cout` w catchu, najwyżej dodajemy informacje do loga, ewentualnie na strumień błędów `cerr`. Najważniejsze jest to, aby "usprawnić" nasz program, zablokować daną akcję i pozwolić działać dalej, albo spróbować dokonać akcji jeszcze raz. Jeszcze raz podsumowując najważniejsze w bloku catch jest "usprawnieni" naszego programu i pozwolenie mu działać dalej.
+
 {{< br >}}
 
 Listę zdefiniowanych wyjątków znajdziemy w [dokumentacji](https://en.cppreference.com/w/cpp/error/exception).
@@ -300,9 +304,9 @@ Listę zdefiniowanych wyjątków znajdziemy w [dokumentacji](https://en.cpprefer
 
 # Klasa do łapania wyjątków
 
-Oczywiście, jak już się zapewne domyślacie i zdążyliście poznać c++ nie pozostajemy tylko na tych wyjątkach, które zostały zdefiniowane, sami możemy tworzyć własne wyjątki. Aby móc z tego skorzystać skorzystamy z dziedziczenia, ponieważ odziedziczymy po klasie `exception` przepis, jak mają wyglądać takie klasy.
+Oczywiście, jak już się zapewne domyślacie i zdążyliście poznać c++ nie pozostajemy tylko na tych wyjątkach, które zostały zdefiniowane, sami możemy tworzyć własne wyjątki. Aby móc z tego skorzystać, skorzystamy z dziedziczenia, ponieważ odziedziczymy po klasie `exception` przepis, jak mają wyglądać takie klasy.
 
-**Klasa exception**
+**Przykład Klasa exception wydostany z plików nagłowkowych:**
 ```cpp
 namespace std
 {
@@ -381,7 +385,9 @@ Co nam to dało? Jeżeli zostanie rzucony jakikolwiek wyjątek, to nasz blok `ca
    1. Przetestuj działanie dla kilku równań.
    2. Przetestuj działanie dla równań z przesłanymi dodatkowymi wartościami przez przechwytywanie nazw (captures).
 2. Stwórz kontener, który wypełnisz danymi dowolnego typu. Następnie użyj funkcji z biblioteki standardowej `find_if`, aby znaleźć element z wymyślonym przez Ciebie warunkiem. Przykładowo, kontener może przechowywać napisy, a Ty chcesz znaleźć pierwszy, który ma w sobie 3 litery `a`.
-
+3. Stwórz program, który będzie wczytywać wartość, dopóki nie uda się jej zrzutować ze `string` do `double`.
+4. Stwórz deklarację swojej klasy wyjątku, która będzie przechowywać kod błędu (numer) oraz jego opis.
+5. Stwórz program rzucający Twój stworzony wyjątek.
 
 
 
