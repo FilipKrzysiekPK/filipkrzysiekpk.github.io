@@ -5,7 +5,7 @@ date: 2023-11-20
 ---
 
 
-# Laboratorium 5
+# Laboratorium 6
 
 ### Cele laboratorium i poruszane zagadnienia
 
