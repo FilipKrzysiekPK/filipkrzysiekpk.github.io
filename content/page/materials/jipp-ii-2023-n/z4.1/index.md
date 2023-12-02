@@ -4,7 +4,7 @@ layout: singleNoHeader
 date: 2023-12-02
 ---
 
-# Laboratorium 3
+# Laboratorium 4 - dodatek
 
 ### Cele laboratorium i poruszane zagadnienia
 

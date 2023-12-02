@@ -4,7 +4,7 @@ layout: singleNoHeader
 date: 2023-12-02
 ---
 
-# Laboratorium 3
+# Laboratorium 4
 
 ### Cele laboratorium i poruszane zagadnienia
 
@@ -181,12 +181,12 @@ W funkcji `saveSomeValues` tworzymy strukturę i przypisujemy do nich wartości.
 
 Strumienie plikowe można przyrównać do strumieni `cin` i `cout`. Dzieje się tak, ponieważ wszystkie one dziedziczą z tej samej klasy bazowej:
 
-![Diagram klas](media/files/jipp/IO_library.png)
+![Diagram klas](imgJipp/IO_library.png)
 *[cppreference](https://en.cppreference.com/w/cpp/io)*
 
 Strumienie plikowe:
 
-![Diagram klas](media/files/jipp/fstream.png)
+![Diagram klas](imgJipp/fstream.png)
 *[cppreference](https://en.cppreference.com/w/cpp/io/basic_fstream)*
 
 Teraz można się prosto domyślić, że obsługa plików wygląda bardzo podobnie, jak strumienie `cin` i `cout`. Prześledźmy kilka najważniejszych metod tych strumieni.

@@ -3,6 +3,7 @@ baseURL = 'https://filipkrzysiekpk.github.io/'
 languageCode = 'pl-pl'
 title = 'Krzysztof Swałdek'
 theme = 'stack'
+staticDir = ['staticFiles']
 
 defaultContentLanguage = "pl"
 
