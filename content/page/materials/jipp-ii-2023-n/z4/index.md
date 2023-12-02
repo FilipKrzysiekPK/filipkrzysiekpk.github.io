@@ -234,6 +234,7 @@ Po otwarciu strumienia plikowego należy sprawdzić, czy na pewno się on otworz
 * `good()`
 * `is_open()`
 * `bad()`
+* `fail()`
 
 {{< space 5 >}}
 
@@ -621,9 +622,20 @@ Oczywiście istnieje jeszcze inny sposób na blokowanie "niechcianych" argument�
     *                           *
     *****************************
 ``````
+2. Stwórz program, który będzie wczytywał plik csv, w którym są zapisane kolejno:
+   - numer linii
+   - przystanek początkowy
+   - przystanek końcowy
+   - operator
 
-2. Stwórz klasę przechowującą punkty. Podczas tworzenia punktu użytkownik deklaruje, w ilu wymiarowej przestrzeni będą one sytuowane. Dodatkowo muszą one przechowywać jego nazwę. Klasa powinna posiadać metodę służącą do zapisu tych danych do binarnego strumienia plikowego przekazanego przez parametr oraz kolejną metodę do jego odczytywania.
-3. Stwórz bibliotekę służącą do czytania i zapisywania plików csv. Powinna ona posiadać funkcjonalności:
+   Następnie zapisywał w osobnym pliku linie tramwajowe, a w osobnym autobusowe (linie tramwajowe mają 1 lub 2 cyfry, a autobusowe 3), w takim samym układzie (takie same kolumny, taka sama ich kolejność).
+
+   Pliki:
+   - [napisy zapisane w cudzysłowach](filesJipp/dataQuotes.csv)
+   - [napisy zapisane bez cudzysłowów](filesJipp/dataNoQ.csv)
+
+3. Stwórz klasę przechowującą punkty. Podczas tworzenia punktu użytkownik deklaruje, w ilu wymiarowej przestrzeni będą one sytuowane. Dodatkowo muszą one przechowywać jego nazwę. Klasa powinna posiadać metodę służącą do zapisu tych danych do binarnego strumienia plikowego przekazanego przez parametr oraz kolejną metodę do jego odczytywania.
+4. Stwórz bibliotekę służącą do czytania i zapisywania plików csv. Powinna ona posiadać funkcjonalności:
     * ustawiania czy pierwszy wiersz jest wierszem nagłówkowym
     * pobieranie wartości z aktualnego wiersza za pomocą operatora `[]`
         * Argumentem jest liczba będąca numerem kolumny
@@ -637,8 +649,8 @@ Oczywiście istnieje jeszcze inny sposób na blokowanie "niechcianych" argument�
 
 # Zadania szablony
 
-1. Stwórz funkcję `min`, `max`, `printArray`, które będą wykorzystywać mechanizm szablonów. Funkcja przyjmuje 2 argumenty i zwraca wartość.
-2. Stwórz funkcję `find`, która jako parametr przyujmuje `vector` dowolnego typu i wyszukiwaną wartość i zwraca indeks poszukiwanego elementu. Jeżeli nie zostanie znaleziony, to -1.
+1. Stwórz funkcję `min`, `max`, które będą wykorzystywać mechanizm szablonów. Funkcja przyjmuje 2 argumenty i zwraca wartość.
+2. Stwórz funkcję `find`, która jako parametr przyjmuje `vector` dowolnego typu i wyszukiwaną wartość i zwraca indeks poszukiwanego elementu. Jeżeli nie zostanie znaleziony, to -1.
 
 3. Stwórz klasę `Triple`, która będzie przechowywać wartości 3 typów.
     * Posiada konstruktor bezparametryczny
