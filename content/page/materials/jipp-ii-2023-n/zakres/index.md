@@ -16,11 +16,11 @@ date: 2023-10-20
 |                      Dziedziczenie, hierarchia klas                      |            ✅            |                           |
 |                     Inicjowanie i niszczenie obiektu                     |            ✅            |                           |
 |                          Konstruktory kopiujące                          |            ✅            |                           |
-|                             Inline functions                             |                        |                           |
-|                             Friend functions                             |                        |                           |
+|                             Inline functions                             |            ✅            |                           |
+|                             Friend functions                             |            ✅            |                           |
 |            Operator new, delete, obsługa pamięci dynamicznej             |            ✅            |                           |
-|                         Przeciążanie operatorów                          |                        |                           |
-| Przekazywanie obiektów do funkcji (przez: wartość, wskaźnik, referencje) |                        |                           |
+|                         Przeciążanie operatorów                          |            ✅            |                           |
+| Przekazywanie obiektów do funkcji (przez: wartość, wskaźnik, referencje) |            ✅            |                           |
 |                        Szablony (funkcji i klasy)                        |                        |                           |
 |                             Praca z plikami                              |                        |                           |
 |                 Funkcje wirtualne, destruktory wirtualne                 |            ✅            |                           |

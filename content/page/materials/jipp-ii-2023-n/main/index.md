@@ -26,6 +26,8 @@ date: 2023-10-20
 |   1   | 21.10.2023 |      Zajęcia organizacyjne, różnice pomiędzy c i c++, alokacja pamięci, CMake, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII      | [📄🔗](/page/materials/jipp-ii-2023-n/z1) |
 |   2   | 29.10.2023 |      Konstruktory kopiujące, dziedziczenie, polimorfizm, metody wirtualne      | [📄🔗](/page/materials/jipp-ii-2023-n/z2) |
 |   3   | 04.11.2023 |  Funkcje inline, zaprzyjaźnione, operatory, przekazywanie elementów do funkcji        | [📄🔗](/page/materials/jipp-ii-2023-n/z3) |
+|   4   | 02.12.2023 |  Operacje na plikach, szablony, konwersja typów.       | [📄🔗](/page/materials/jipp-ii-2023-n/z4) |
+|      |  |   Wyjątki, obsługa błędów, lambdy.       | [📄🔗](/page/materials/jipp-ii-2023-n/z4.1) |
 
 
 {{< space 5 >}}
