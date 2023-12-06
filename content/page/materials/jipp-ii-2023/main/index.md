@@ -32,7 +32,7 @@ date: 2023-10-05
 |   6   | 15.11.2023 | Funkcje inline i zaprzyjaźnione, operatory | [📄🔗](/page/materials/jipp-ii-2023/z6) |
 |   7   | 22.11.2023 | Operator przypisania, static, konwersje typów | [📄🔗](/page/materials/jipp-ii-2023/z7) |
 |   8   | 29.11.2023 | Funkcje lambda, wyjątki | [📄🔗](/page/materials/jipp-ii-2023/z8) |
-|   9   | 06.12.2023 | Szablony | [📄🔗](#) |
+|   9   | 06.12.2023 | Szablony | [📄🔗](/page/materials/jipp-ii-2023/z9) |
 |   10  | 13.12.2023 |  | [📄🔗](#) |
 |   11  | 20.12.2023 |  | [📄🔗](#) |
 |   12  | 03.01.2024 |  | [📄🔗](#) |
