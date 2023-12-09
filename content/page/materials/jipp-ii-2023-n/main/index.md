@@ -28,6 +28,7 @@ date: 2023-10-20
 |   3   | 04.11.2023 |  Funkcje inline, zaprzyjaźnione, operatory, przekazywanie elementów do funkcji        | [📄🔗](/page/materials/jipp-ii-2023-n/z3) |
 |   4   | 02.12.2023 |  Operacje na plikach, szablony, konwersja typów.       | [📄🔗](/page/materials/jipp-ii-2023-n/z4) |
 |      |  |   Wyjątki, obsługa błędów, lambdy.       | [📄🔗](/page/materials/jipp-ii-2023-n/z4.1) |
+|   5   | 08.12.2023 |  Static, szablony, biblioteka STL.       | [📄🔗](/page/materials/jipp-ii-2023-n/z5) |
 
 
 {{< space 5 >}}

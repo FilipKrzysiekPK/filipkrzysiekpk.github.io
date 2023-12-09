@@ -1,0 +1,4 @@
+.vscode
+.frontmatter
+.hugo_build.lock
+frontmatter.json

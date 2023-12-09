@@ -21,10 +21,10 @@ date: 2023-10-20
 |            Operator new, delete, obsługa pamięci dynamicznej             |            ✅            |                           |
 |                         Przeciążanie operatorów                          |            ✅            |                           |
 | Przekazywanie obiektów do funkcji (przez: wartość, wskaźnik, referencje) |            ✅            |                           |
-|                        Szablony (funkcji i klasy)                        |                        |                           |
-|                             Praca z plikami                              |                        |                           |
+|                        Szablony (funkcji i klasy)                        |            ✅          |                           |
+|                             Praca z plikami                              |            ✅         |                           |
 |                 Funkcje wirtualne, destruktory wirtualne                 |            ✅            |                           |
-|                                   RTTI                                   |                        |                           |
+|                                   RTTI                                   |            ✅          |                           |
 |                              Biblioteka STL                              |                        |                           |
 
 
@@ -32,10 +32,10 @@ date: 2023-10-20
 
 |     Temat      | Poruszone na zajęciach | Zrealizowany wyczerpująco |
 | :------------: | :--------------------: | :-----------------------: |
-| Podstawy CMake |                        |             ❌             |
+| Podstawy CMake |        ✅              |             ❌             |
 |  Debugowanie   |                        |                           |
-|  Przekazywanie parametru   |                        |                           |
-|  Wyjątki   |                        |                           |
+|  Przekazywanie parametru   |         ✅               |                           |
+|  Wyjątki   |       ✅               |                           |
 |  Static   |                        |                           |
-|  Lambda   |                        |                           |
+|  Lambda   |         ✅            |                           |
 
