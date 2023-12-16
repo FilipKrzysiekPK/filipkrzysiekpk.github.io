@@ -29,6 +29,7 @@ date: 2023-10-20
 |   4   | 02.12.2023 |  Operacje na plikach, szablony, konwersja typów.       | [📄🔗](/page/materials/jipp-ii-2023-n/z4) |
 |      |  |   Wyjątki, obsługa błędów, lambdy.       | [📄🔗](/page/materials/jipp-ii-2023-n/z4.1) |
 |   5   | 08.12.2023 |  Static, szablony, biblioteka STL.       | [📄🔗](/page/materials/jipp-ii-2023-n/z5) |
+|   6   | 16.12.2023 |  Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu       | [📄🔗](/page/materials/jipp-ii-2023-n/z6) |
 
 
 {{< space 5 >}}
