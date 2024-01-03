@@ -255,7 +255,7 @@ int main() {
 
     auto stop = chrono::system_clock::now();
 
-    auto elapsed = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+    auto elapsed = chrono::duration_cast<chrono::milliseconds>(stop - start).count();
     cout << elapsed << " ms" << endl;
 }
 ```
