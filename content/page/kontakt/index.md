@@ -22,8 +22,8 @@ MS Teams:   Tutaj trzeba mnie wyszukać. **Ważne** pisz na konto pracownicze (k
 
 ## Konsultacje
 
-* **Wtorek 17:00 - 18:00** Katedra Informatyki, 144/10
-* **Środa 14:15 - 15:15** Katedra Informatyki, 144/10
+* **Wtorek 16:00 - 17:00** Katedra Informatyki, 144/10
+* **Środa 16:00 - 17:00** Katedra Informatyki, 144/10
 * Inne terminy po kontakcie przez MS Teams
 
 Przed przyjściem na konsultacje **napisz wiadomość**!
