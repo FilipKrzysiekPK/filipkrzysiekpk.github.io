@@ -39,13 +39,13 @@
     {{/* List only pages that are not a subsection */}}
     {{ $paginator := .Paginate $pages }}
     {{ range $paginator.Pages }}
-    <article class="main-article">
-        <section class="article-content">
+    <!--<article class="main-article">
+        <section class="article-content">-->
         
             {{ partial "article/articleNoHeader.html" . }}
         
-    </section>
-    </article>
+    <!--</section>
+    </article>-->
     {{ end }}
 
     {{- partial "pagination.html" . -}}
