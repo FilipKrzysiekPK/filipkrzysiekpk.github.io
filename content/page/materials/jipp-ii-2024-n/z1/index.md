@@ -2,11 +2,10 @@
 title: "Języki i Paradygmaty Programowania II"
 layout: singleNoHeader
 date: 2023-10-20
-toc: true
-TOCEnabled: true
+toc: "enabled"
+TOCEnabled: "enabled"
 ---
 
-{{ .Scratch.Set "TOCEnabled" "true" }}
 
 # Laboratorium 1
 
@@ -197,6 +196,12 @@ cout << "Password length: " << pass.size() << endl;
 ```
 
 Powyższy przykład przedstawia kilka podstawowych możliwości `string` ów. Oczywiście można dostawać się do poszczególnych znaków za pomocą operatora `[]`, czy też za pomocą `+` łączyć dwa ciągi. Powyższy przykład pokazuje bardzo podstawowe możliwości, nie żaden sposób nie wyczerpuje tematu.
+
+{{< space 3 >}}
+
+#### Zadanie
+
+Wczytaj z klawiatury tekst, następnie zlicz w nim litery `a` oraz wypisz na ekran ich liczbę. Zamień wszystkie litery `a` na znak `_`.
 
 {{< space 9 >}}
 

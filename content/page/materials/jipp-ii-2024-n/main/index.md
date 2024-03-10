@@ -1,15 +1,15 @@
 ---
 title: "Języki i Paradygmaty Programowania II"
 layout: singleNoHeader
-date: 2023-10-20
+date: 2024-03-10
 ---
 
 # Języki i Paradygmaty Programowania II
 
 ### Przydatne materiały
 
-* [Kurs na Delcie](https://delta.pk.edu.pl/course/view.php?id=4682)
-* [Środowiska programistyczne](/page/materials/resources)
+* [Kurs na Delcie](hhttps://delta.pk.edu.pl/course/view.php?id=4996#section-0)
+* [Środowiska programistyczne](/page/materials/ide)
 
 {{< space 5 >}}
 
