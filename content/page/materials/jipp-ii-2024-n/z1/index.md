@@ -6,7 +6,7 @@ toc: true
 TOCEnabled: true
 ---
 
-{{ .Context.Scratch.Set "TOCEnabled" true }}
+{{ .Scratch.Set "TOCEnabled" "true" }}
 
 # Laboratorium 1
 
