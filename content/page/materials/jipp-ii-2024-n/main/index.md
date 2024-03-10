@@ -8,14 +8,14 @@ date: 2024-03-10
 
 ### Przydatne materiały
 
-* [Kurs na Delcie](hhttps://delta.pk.edu.pl/course/view.php?id=4996#section-0)
+* [Kurs na Delcie](https://delta.pk.edu.pl/course/view.php?id=4996)
 * [Środowiska programistyczne](/page/materials/ide)
 
 {{< space 5 >}}
 
 ### Zakres materiału
 
-[Zakres materiału](/page/materials/jipp-ii-2023-n/zakres/)
+[Zakres materiału](/page/materials/jipp-ii-2024-n/zakres/)
 
 {{< space 5 >}}
 
