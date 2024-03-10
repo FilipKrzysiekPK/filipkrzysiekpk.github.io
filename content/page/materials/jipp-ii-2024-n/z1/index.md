@@ -3,6 +3,7 @@ title: "Języki i Paradygmaty Programowania II"
 layout: singleNoHeader
 date: 2023-10-20
 toc: true
+TOCEnabled: true
 ---
 
 {{ .Context.Scratch.Set "TOCEnabled" true }}
