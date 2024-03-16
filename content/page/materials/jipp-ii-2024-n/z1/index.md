@@ -130,7 +130,7 @@ Oczywiście, aby można było używać `cout` i `endl` (znak nowej linii) w ten 
 
 ```cpp
     int num = 5;
-    stds::cout << "Hello world " << num << std::endl;
+    std::cout << "Hello world " << num << std::endl;
 ```
 
 {{< space 5 >}}
