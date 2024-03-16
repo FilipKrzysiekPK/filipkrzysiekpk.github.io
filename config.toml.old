@@ -41,3 +41,7 @@ pattern = "^.+\\.(html|xml|json)$"
 
 # Command:
 # hugo deploy --force -s ../kswaldek
+
+[params]
+  [[params.article]]
+    toc=true

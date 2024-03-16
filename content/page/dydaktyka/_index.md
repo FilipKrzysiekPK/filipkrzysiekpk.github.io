@@ -2,6 +2,7 @@
 title: "Dydaktyka"
 layout: listNew
 # layout: singleSubSections
+toc: false
 menu:
     main:
         name: Dydaktyka

@@ -2,6 +2,7 @@
 title: "Języki i Paradygmaty Programowania II"
 layout: singleNoHeader
 date: 2024-03-10
+toc: false
 ---
 
 # Języki i Paradygmaty Programowania II

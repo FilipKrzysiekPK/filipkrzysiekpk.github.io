@@ -1,6 +1,7 @@
 ---
 title: "Kontakt i konsultacje"
 layout: singleNoHeader
+toc: false
 menu:
     main: 
         weight: -90

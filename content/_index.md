@@ -1,6 +1,7 @@
 ---
 title: "Strona główna"
 isHome: true
+toc: false
 menu:
     main:
         name: Strona główna
