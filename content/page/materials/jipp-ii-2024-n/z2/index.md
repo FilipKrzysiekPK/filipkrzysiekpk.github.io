@@ -281,7 +281,7 @@ public:
 
 class SmallElephant: public Elephant {
 public:
-    void print() override {
+    void print() {
         cout << "I'm small Elephant!" << endl;
     }
 };
