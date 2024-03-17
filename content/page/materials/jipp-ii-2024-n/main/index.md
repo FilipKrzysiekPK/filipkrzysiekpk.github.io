@@ -25,6 +25,7 @@ toc: false
 |  Nr   |    Data    |            Tematyka             |               Materiały               |
 | :---: | :--------: | :-----------------------------: | :-----------------------------------: |
 |   1   | 10.03.2024 |      Zajęcia organizacyjne, różnice pomiędzy c i c++, stringi, alokacja pamięci, CMake, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII      | [📄🔗](/page/materials/jipp-ii-2024-n/z1) |
+| 2 | 17.03.2024 | | [📄🔗](/page/materials/jipp-ii-2024-n/z2) |
 
 
 
