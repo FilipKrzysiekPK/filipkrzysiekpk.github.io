@@ -45,6 +45,48 @@ Drugi kontener, który omówię już tylko w dwóch zdaniach, to `map`a. Tutaj w
 
 {{< space 7 >}}
 
+## Przekazywanie obiektów do funkcji
+
+Jakie znasz sposoby przekazywania obiektów do funkcji? Tak, przez kopię, przez referencję i jeszcze jest przez wskaźnik. Z którego z nich najczęściej korzystasz? Zapewne przez kopię, domyslnie się z niego korzysta i praktycznie zawsze w taki sposób przekazuje się typy proste. Rozważmy prosty przypadek, masz jakiś kontener, albo ciąg znaków, który zajmuje 100 MB. Potrzebujesz przekazać go do funkcji, aby wykonać jakąś operację. Rozważmy pierwszy przypadek, przekazanie przez kopie. Jakie będą tego cechy i konsekwencje? Pierwsza, najprostsza rzecz, Zajmiemy 2x wiecej pamięci operacyjnej, a do tego czas/operacje procesora potrzebne do wykonania kopii. Podsumowując jest to bardzo zasobochłonne. Kolejny przypadek (troszkę je zgrupuję), przekazanie przez referencję, albo przez wskaźnik. Czy problem z zajęciem dodatkowej pamięci nadal występuje? Nie, dodatkowo nie musimy wykonywać operacji kopiowania pamięci. Pozostaje jeden problem modyfikując wartości w funkcji, modyfikujemy oryginał. Na to też mamy rozwiązanie, tworzymy stalą referencję/wskaźnik.
+
+Przykład przekazania obiektu przez kopię:
+
+```cpp
+void fun(string txt) {
+    //do sth
+}
+
+int main() {
+    string txt;
+    fun(txt);
+
+    return 0;
+}
+```
+
+Przykład przekazania stałej przez referencję:
+
+```cpp
+void fun(const string &txt) {
+    //do sth
+}
+
+int main() {
+    string txt;
+    fun(txt);
+
+    return 0;
+}
+```
+
+{{< space 2 >}}
+
+Oczywiście jeżeli będziemy chcieli modyfikować obiekt wewnątrz funkcji (i nie chcieli zmieniać oryginału), to przekazujemy go przez kopię. W innym przypadku praktycznie zawsze będziemy przekazywać obiekty (**nie typy proste**) jako stałe przez referencję, dzięki czemu w znaczacy sposób optymalizując nasz program.
+
+Jeszcze raz podkreślam, dla optymalizacji nie przekazujemy typów prostych przez referencję, tylko typy złożone.
+
+{{< space 5 >}}
+
 ## Konstruktory kopiujące
 
 Zanim zaczniemy omawiać tematykę konstruktorów kopiujących przetestujmy działanie kodu znajdującego
