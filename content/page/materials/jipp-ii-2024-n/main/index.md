@@ -27,8 +27,8 @@ toc: false
 |  1  |            10.03.2024            | Zajęcia organizacyjne, różnice pomiędzy c i c++, stringi, alokacja pamięci, CMake, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII | [📄🔗](/page/materials/jipp-ii-2024-n/z1) |
 |  2  |            17.03.2024            |              Konstruktor kopiujący, przekazywanie elementów do funkcji, dziedziczenie, polimorfizm, usuwanie i używanie domyślnego konstruktora               | [📄🔗](/page/materials/jipp-ii-2024-n/z2) |
 |  3  | 23.03.2024 {{< br >}} 20.04.2024 |                                     Funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static, debugowanie                                      | [📄🔗](/page/materials/jipp-ii-2024-n/z3) |
-|  4  |                                  |                                              Szablony, obsługa plików, obsługa błędów, wyjątki, konwersja typów                                               |                                             |
-|  5  |                                  |                                                                 Biblioteka STL, lambdy, RTTI                                                                  |                                             |
+|  4  | 20.04.2024 {{< br >}} 11.05.2024 |                                              Szablony, obsługa plików, konwersja typów                                               | [📄🔗](/page/materials/jipp-ii-2024-n/z4) |
+|  5  |                                  |                                                                 Biblioteka STL, obsługa błędów, wyjątki, lambdy, RTTI                                      |                                             |
 |  6  |                                  |                                        Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu                                        |                                             |
 
 
