@@ -204,7 +204,7 @@ int main() {
 ```
 
 
-{{< script src="//onlinegdb.com/embed/js/vwIoLCrn0?theme=dark" >}}
+{{< html script src="//onlinegdb.com/embed/js/vwIoLCrn0?theme=dark" >}}
 
 Tutaj pierwsza uwaga, w aktualnym przypadku i większości przypadków szablony będziemy deklarować i *implementować* w tym samym pliku i będzie to plik nagłówkowy.
 
