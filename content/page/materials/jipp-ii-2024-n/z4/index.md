@@ -131,7 +131,15 @@ int main() {
 }
 ```
 
-Tutaj mamy iny przykład. niestety nie jest łatwo wypisać `float` binarnie (bez używania reinterpret_cast). Dokonujemy tutaj konwersji za pomocą `static_cast` i `reinterpret_cast` z `unsigned` do `float`, a następnie do `int`. Mogłoby się wydawać, że obydwa wyniki będą takie same, jednakże tak się nie dzieje.
+Po uruchomieniu tego programu możemy zauważyć, że Na początku wypisze się nam wartość 100, a w drugim przypadku litera `d`, która odpowiada wartości 100 w tablicy asci. Zapis binarny obydwóch wartości jest taki sam.
+
+Jak to zadziałało? Została dokonana konwersja wskaźnika, zamiast inetrpretować `int`, teraz zaczęliśmy go uznawać, jako `char`. Czyli nie zmieniamy postaci danych, tylko i wyłącznie zmieniamy sposób ich interpretowania.
+
+Pamiętając (albo sprawdzając [dokumentację](https://en.cppreference.com/w/cpp/language/types)) wiemy, że `int` ma 16/32 bity, a `char` 8, co oznacza, że w jednym `int` zmieścimy 4 `char`. Używając przesunięcia bitowego dodajmy do zmiennej int znak z tabeli ASCI o numerze 103, a następnie wypiszmy te dane.
+
+{{< space 2 >}}
+
+Tutaj mamy inny przykład. niestety nie jest łatwo wypisać `float` binarnie (bez używania reinterpret_cast). Dokonujemy tutaj konwersji za pomocą `static_cast` i `reinterpret_cast` z `unsigned` do `float`, a następnie do `int`. Mogłoby się wydawać, że obydwa wyniki będą takie same, jednakże tak się nie dzieje.
 
 ```cpp
 #include <bitset>
@@ -155,3 +163,180 @@ int main() {
     return 0;
 }
 ```
+
+{{< space 4 >}}
+
+
+## Szablony
+
+Pisząc różne funkcje, czy też tworząc klasę, czasem potrzebujemy, aby mogły funkcjonować na wszystkich typach danych, albo po prostu na typach, których nie znamy pisząc daną funkcjonalność. Załóżmy że chcemy stworzyć funkcję `min`. W momencie jej tworzenia nie wiemy na jakim typie danych użytkownik będzie z niej korzystał. Moglibyśmy przeciążyć ją każdym możliwym typem prostym, ale okazałoby się, że programista stworzyłby własny typ, który też można by było używać.
+
+Może podejdźmy do tematu troszkę inaczej. Czy korzystaliśmy już gdzieś, gdzie bazowa klasa potrzebowała, aby jej przekazać typ? Może jakaś funkja? Gdy popatrzymy na poprzedni temat, to przykładowo:
+
+```cpp
+int a = 100;
+float b = static_cast<float>(a);
+```
+
+Mamy rzutowanie, gdzie w nawiasach `< >` podawaliśmy typ. Jeszcze możemy przypomnieć sobie `vectory` do których przekazywaliśmy typ. Korzystaliśmy wtedy właśnie z szablonów (już gotowych).
+
+### Czym są szablony?
+
+Szablony możemy określić, jako "dodatkowa" lista parametrów, która jest wykonywana podczas kompilacji programu. W przeciwieństwie do "normalnych" parametrów, w szablonie możey przekazać typ.
+
+{{< space 5 >}}
+
+### Szablon funkcji
+
+Zacznijmy od najprostszej rzeczy, czyli szablonu funkcji. Stwórzmy prostą metodę, która będzie dodawać 2 liczby.
+
+```cpp
+template<typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+int main() {
+    cout << add(2, 5) << endl;
+    cout << add(2.7, 5.6) << endl;
+    cout << add(2, 5.6) << endl;
+}
+```
+
+
+{{< html src="//onlinegdb.com/embed/js/vwIoLCrn0?theme=dark" >}}
+
+Tutaj pierwsza uwaga, w aktualnym przypadku i większości przypadków szablony będziemy deklarować i *implementować* w tym samym pliku i będzie to plik nagłówkowy.
+
+Spróbuj uruchomić powyższy kod. Czy wszystko się poprawnie skompilowało? Zakomentuj problematyczną linię i spróbuj znowu skompilować. Wywołując funkcję podawałeś w którymś miejscu, jaki to będzie typ? Nie, kompilator sam wydedukował to na podstawie przekazywanych parametrów. Teraz podmień problematyczną linię na tą poniżej, gdzie deklarujemy, jaki chcemy mieć typ.
+
+```cpp
+    cout << add<double>(2, 5.6) << endl;
+```
+
+Zaczęło działać? Dlaczego? Została dokonana niejawna konwersja typu i dlatego działa. Teraz pytanie, czy jesteśmy w stanie zrobić taką funkcję, aby były przyjmowane 2 różne typy bez jawnego deklarowania tego? Oczywiście, że tak, wystarczy, że przez szablon przekażemy 2 "parametry". Tak, pojawi się problem, jeden z nich będzie musiał być typem zwracanym. Który? Trzeba dokonać wyboru.
+
+```cpp
+template<typename T, typename T1>
+T add(T a, T1 b) {
+    return a + b;
+}
+```
+
+{{< space 4 >}}
+
+A jak mogę przekazać zwykłą zmienną przez taki szablon?
+
+Wystarczy, że po prostu go tam zadeklarujesz i zostanie przekazany.
+
+```cpp
+template<typename T, int x>
+T add(T a, T b) {
+    return (a + b) * x;
+}
+
+int main() {
+    cout << add<int, 6>(2, 5) << endl;
+    cout << add<double, 8>(2.7, 5.6) << endl;
+    cout << add<float, 9>(2, 5.6) << endl;
+}
+```
+
+Może się teraz pojawić pytanie, czy można tak zrobić, aby nie musieć przekazywać tej wartości `x`? Oczywiście, że tak. Tak jak mieliśmy parametry domyślne w funkcji, to tutaj też możemy przypisać domyślną wartość tych "parametrów".
+
+```cpp
+template<typename T, int x = 1>
+```
+
+{{< space 4 >}}
+
+**Przeciążanie szablonów**
+
+Istnieje możliwość przeciążania szablonów, albo funkcji szablonowych. Panuje tutaj kilka zasad:
+
+- Przeciążane szablony muszą się różnić argumentami
+- Przeciążany szablon odnosi się do przeciążonej funkcji
+- Istnieje jakaś funkcja, a my tworzymy szablon, wtedy ten szablon tworzy niezadeklarowane przeciążenia funkcji
+- Specjalizacje - definiujemy dla konkretnych wartości nowe zachowanie naszej funkcji
+
+
+```c++
+template<typename T>
+T addS(T a, T b) {
+    return a + b + cons;
+}
+
+
+template<typename T, int cons>
+T addS(T a, T b) {
+    return a + b + cons;
+}
+```
+
+{{< space 1 >}}
+
+**Szablon metod**
+
+Podobnie jak w funkcjach możemy stworzyć szablon dla metod w klasie. Nie musimy wtedy tworzyć szablonu dla całej klasy, wystarczy dla jednej metody. Działa ona na dosłownie takiej samej zasadzie jak dla funkcji.
+
+{{< space 6 >}}
+
+## Szablon klasy
+
+Deklarowanie szablonu dla klasy wygląda bardzo podobnie co do funkcji, jednakże deklarujemy go dla całej klasy.
+
+```cpp
+template<typename T>
+class Variable {
+    T var;
+
+public:
+    Variable() {
+
+    }
+
+    Variable(T var): var(var) {}
+
+    T getValue() {
+        return var;
+    }
+
+    void setValue(T newVal) {
+        var = newVal;
+    } 
+}
+```
+
+Tak samo, jak dla funkcji deklaracja i implementacja musi znajdować się w tym samym pliku. (Jak się bardzo postara, to da się to rozdzielić.)
+
+{{< space 3 >}}
+
+## Ograniczanie tego przekazywanych wartości przez szablon
+
+Przed c++ 20, który wprowadza pewną nowość w tej dziedzinie był inny sposób na narzucenie ograniczeń.
+Jest to forawrd declarations, czyli deklarowanie argumentów, jakie może przyjąć szablon. Niestety robi to odrobinę zamieszania, ponieważ tutaj musimy rozdzielić deklarację od implementacji 🙄. Zobaczmy przykład.
+
+Plik nagłówkowy (.h)
+
+```cpp
+template <typename T>
+T add(T a, T b);
+```
+
+Plik źródłowy (.cpp)
+
+```cpp
+template <typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+template int add<int>(int, int);
+template double add<double>(double, double);
+```
+
+{{< space 2>}}
+
+Oczywiście istnieje jeszcze inny sposób na blokowanie "niechcianych" argumentów już na etapie kompilacji. Jest to rzucanie błędów kompilacji (`static_assert`).
+
+{{< space 7 >}}
