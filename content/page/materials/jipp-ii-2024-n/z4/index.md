@@ -357,13 +357,13 @@ Strumienie plikowe:
 
 Teraz można się prosto domyślić, że obsługa plików wygląda bardzo podobnie, jak strumienie `cin` i `cout`. Prześledźmy kilka najważniejszych metod tych strumieni.
 
-## Załączanie bibliotek
+### Załączanie bibliotek
 
 Aby móc korzystać ze strumieni plikowych musimy załączyć bibliotekę `fstream`.
 
 {{< space 5 >}}
 
-## Inicjalizacja strumienia
+### Inicjalizacja strumienia
 
 Strumień możemy zainicjalizować na kilka sposobów. Pierwszym z nich jest wywołanie konstruktora z parametrami:
 
@@ -393,25 +393,25 @@ Do otwarcia pliku można też użyć metody `open`
 
 {{< space 5 >}}
 
-## Sprawdzanie poprawności
+### Sprawdzanie poprawności
 
-Po otwarciu strumienia plikowego należy sprawdzić, czy na pewno się on otworzył. Użyjemy do tego jednej z metod:
+Po otwarciu strumienia plikowego należy sprawdzić, czy na pewno się on otworzył. Najlepiej użyć do tego metody `is_open`. 
 
-* `good()`
-* `is_open()`
-* `bad()`
-* `fail()`
+* `good()` - (basic_ios) sprawdza, czy nie wystąpiły jakieś błędy
+* `is_open()` - sprawdza, czy strumień ma przypisany plik
+* `bad()` - (basic_ios) sprawdza, czy wystąpił nieodwracalny błąd
+* `fail()` - (basic_ios) sprawdza, czy nie wystąpiły jakieś błędy
 
 {{< space 5 >}}
 
-## Obsługa strumieni
+### Obsługa strumieni
 
 Obsługa strumieni wygląda tak samo, jak `cin` i `cout`, tylko tyle, że zamiast tych nazw używamy obiektu przechowującego nasz strumień.
 
 ```cpp
 ifstream in = ifstream("hello.txt");
 
-if(in.good()) {
+if(in.is_open()) {
     string temp;
     in >> temp;
     cout << temp;
@@ -420,9 +420,9 @@ if(in.good()) {
 
 {{< space 5 >}}
 
-## Zamykanie strumieni
+### Zamykanie strumieni
 
-Każdy strumień należy zamknąć po zakończeniu jego używania, ponieważ może to blokować dostęp do pliku. Co więcej, jeżeli go zamkniemy, to mamy pewność, że dane zostały do niego zrzucone i w razie nagłej awarii naszego programu nie zostaną utracone dane. Strumienie zamykamy za pomocą metody `close()`. Możemy też ręcznie wywołać zrzucenie strumienia do pliku, służy do tego metoda `flush()`.
+Każdy strumień należy zamknąć po zakończeniu jego używania, ponieważ może to blokować dostęp do pliku. Co więcej, jeżeli go zamkniemy, to mamy pewność, że dane zostały do niego zrzucone i w razie nagłej awarii naszego programu nie zostaną one utracone. Strumienie zamykamy za pomocą metody `close()`. Możemy też ręcznie wywołać zrzucenie strumienia do pliku, służy do tego metoda `flush()`.
 
 ```cpp
 int main() {
@@ -448,7 +448,7 @@ int main() {
 
 {{< space 5 >}}
 
-## Czytanie pliku
+### Czytanie pliku
 
 Plik możemy czytać słowo po słowie, a dokładniej od białego znaku do białego znaku, sprawdzając, czy nie dotarliśmy do końca pliku (metoda `eof()`). W takim przypadku będziemy korzystać ze strumienia plikowego, tak jak z `cin`.
 
@@ -491,7 +491,7 @@ int main() {
 
 {{< space 5 >}}
 
-## Binarne zapisywanie i czytanie plików
+### Binarne zapisywanie i czytanie plików
 
 Dotychczas czytaliśmy pliki z wartości zapisanych jawnym tekstem. Jednakże możemy zrzucić zawartość naszych zmiennych bezpośrednio do pliku (bez przeprowadzania konwersji do tekstu). Będzie to zapis binarny i musimy do tego użyć `reinterpret_cast` oraz metody `write`, której mówimy ile znaków chcemy zapisać.
 
@@ -532,11 +532,10 @@ int main() {
     return 0;
 }
 ```
-    
 
 {{< space 5 >}}
 
-## Binarny zapis i odczyt obiektu
+### Binarny zapis i odczyt obiektu
 
 Przeanalizuj poniższy przykład, sprawdź, czy działa poprawnie.
 
@@ -603,3 +602,20 @@ int main() {
 Wiesz, dlaczego on działa w taki sposób? Zastanów się, jakie typy zapisałeś do pliku.
 
 Postaraj się to naprawić.
+
+{{< space 2 >}}
+
+### Czy wystarczy dodać flagę bin, aby zapisywać binarnie?
+
+Flaga `bin` podczas otwierania pliku informuje strumień, że będzie binarny. Nie wpływa to na odczytywanie wartości. Zmienia to spoósb interpretacji i wyamgań co do (mówiąc w dużym skrócie) znaków końca linii. Więcej szczegółów w [dokumentacji](https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes).
+
+Parafrazując, jeżeli użyjemy takiej samej składni do zapisu liczby do pliku, to niezależnie, czy był to strumień binarny, czy nie, zapisze się tak samo.
+
+
+{{< space 5 >}}
+
+### Co z kodowaniem plików?
+
+Niestey nie ma na to prostej odpowiedzi i prostego rozwiązania. W przypadku linuxa, domyślnie kodowanie plików to UTF-8 (także konsoli), więc wszystko działa poprawnie. W przypadku windowsa, a dokładniej Visual Studio, jest o wiele trudniej i zagadka jest o wiele większa. Teoretycznie będzie on forsować "swoje" kodowanie.
+
+Nie ma bezpośredniej prostej funkcji, aby to sprawdzić i ustawić kodowanie pliku.
