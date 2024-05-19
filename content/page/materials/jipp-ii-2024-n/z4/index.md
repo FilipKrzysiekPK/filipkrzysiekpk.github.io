@@ -605,6 +605,61 @@ Postaraj się to naprawić.
 
 {{< space 2 >}}
 
+### Binarny zapis i odczyt stringów
+
+```cpp
+int main() {
+    {
+        ofstream out("file.bin", ios::binary | ios::out);
+
+        string str("Hello world!");
+
+        if (out.is_open()) {
+            int size = str.size();
+            out.write(reinterpret_cast<char*>(&size), sizeof(int));
+
+            out.write(str.data(), size);
+        }
+    }
+
+    // Rozwiązanie prostsze
+    {
+        ifstream out("file.bin", ios::binary | ios::in);
+
+        string str;
+
+        if (out.is_open()) {
+            int size = str.size();
+            out.read(reinterpret_cast<char*>(&size), sizeof(int));
+
+            char buff[512];
+            out.read(buff, size);
+            str = string(buff, size);
+            cout << str << endl;
+        }
+    }
+
+    // Rozwiązanie sprytniejsze
+    {
+        ifstream out("file.bin", ios::binary | ios::in);
+
+        string str;
+
+        if (out.is_open()) {
+            int size = str.size();
+            out.read(reinterpret_cast<char*>(&size), sizeof(int));
+
+            str.resize(size);
+            out.read(str.data(), size);
+            cout << str << endl;
+        }
+    }
+    return 0;
+}
+```
+
+{{< space 2 >}}
+
 ### Czy wystarczy dodać flagę bin, aby zapisywać binarnie?
 
 Flaga `bin` podczas otwierania pliku informuje strumień, że będzie binarny. Nie wpływa to na odczytywanie wartości. Zmienia to spoósb interpretacji i wyamgań co do (mówiąc w dużym skrócie) znaków końca linii. Więcej szczegółów w [dokumentacji](https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes).
