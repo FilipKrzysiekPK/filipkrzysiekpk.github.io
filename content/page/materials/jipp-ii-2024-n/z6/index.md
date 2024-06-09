@@ -1,8 +1,8 @@
 ---
 title: Języki i Paradygmaty Programowania II laboratorium 5
 layout: singleNoHeader
-date: 2024-06-09T08:38:12.637Z
-lastmod: 2024-06-09T06:00:21.435Z
+date: 2024-06-09T07:15:29.707Z
+lastmod: 2024-06-09T07:15:40.596Z
 ---
 
 # Laboratorium 6
