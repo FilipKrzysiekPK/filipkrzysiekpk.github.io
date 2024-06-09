@@ -3,7 +3,7 @@ title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
 toc: false
-lastmod: 2024-05-11T11:11:11.690Z
+lastmod: 2024-06-09T06:00:48.212Z
 ---
 
 # Języki i Paradygmaty Programowania II
@@ -30,7 +30,7 @@ lastmod: 2024-05-11T11:11:11.690Z
 |  3  | 23.03.2024 {{< br >}} 20.04.2024 |                                     Funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static, debugowanie                                      | [📄🔗](/page/materials/jipp-ii-2024-n/z3) |
 |  4  | 20.04.2024 {{< br >}} 11.05.2024 |                                              Szablony, obsługa plików, konwersja typów                                                                        | [📄🔗](/page/materials/jipp-ii-2024-n/z4) |
 |  5  | 11.05.2024 {{< br >}} 01.06.2024 |                                                                 Biblioteka STL, obsługa błędów, wyjątki, lambdy, RTTI                                         | [📄🔗](/page/materials/jipp-ii-2024-n/z5) |
-|  6  |                                  |                                        Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu                                        |                                             |
+|  6  |                                  |                                        Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu                                        | [📄🔗](/page/materials/jipp-ii-2024-n/z6)                                            |
 
 
 
