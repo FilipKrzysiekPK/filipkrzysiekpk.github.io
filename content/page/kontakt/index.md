@@ -17,14 +17,14 @@ Emial:   krzysztof.swaldek@pk.edu.pl
 
 Pokój:   Katedra Informatyki 144/10 (przybudówka przy WIiTCh)
 
-MS Teams:   Tutaj trzeba mnie wyszukać. **Ważne** pisz na konto pracownicze (końcówka `@pk.edu.pl`), a nie studenckie!
+MS Teams:   Tutaj trzeba mnie wyszukać
 
 ---
 
 ## Konsultacje
 
-* **Wtorek 16:00 - 17:00** Katedra Informatyki, 144/10
-* **Środa 16:00 - 17:00** Katedra Informatyki, 144/10
+* **poniedziałek 7:45 - 8:45**/**12:15-13:15** Podchorążych, F020 (po wczrśniejszym umówieniu się)
+* **Środa 17:00 - 18:00** Katedra Informatyki, 144/10
 * Inne terminy po kontakcie przez MS Teams
 
 Przed przyjściem na konsultacje **napisz wiadomość**!
