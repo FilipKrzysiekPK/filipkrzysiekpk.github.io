@@ -1,7 +1,6 @@
 ---
-title: "Dydaktyka"
+title: Dydaktyka
 layout: listNew
-# layout: singleSubSections
 toc: false
 menu:
     main:
@@ -9,6 +8,9 @@ menu:
         weight: -80
         params:
             icon: graduation-cap
+categories:
+    - pages
+lastmod: 2025-03-09T16:11:06.659Z
 ---
 
 # Dydaktyka

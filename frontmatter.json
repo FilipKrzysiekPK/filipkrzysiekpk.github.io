@@ -182,5 +182,6 @@
       "title": "Category",
       "name": "categories"
     }
-  ]
+  ],
+  "frontMatter.dashboard.content.pagination": false
 }
