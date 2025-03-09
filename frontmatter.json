@@ -141,6 +141,27 @@
           "type": "datetime"
         }
       ]
+    },
+    {
+      "name": "partials",
+      "pageBundle": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Is in draft",
+          "name": "draft",
+          "type": "draft"
+        },
+        {
+          "title": "layout",
+          "name": "layout",
+          "type": "string"
+        }
+      ]
     }
   ],
   "frontMatter.framework.id": "hugo",
@@ -160,6 +181,13 @@
       "path": "[[workspace]]/content/page",
       "contentTypes": [
         "page"
+      ]
+    },
+    {
+      "title": "Partials",
+      "path": "[[workspace]]/content/page/dydaktyka",
+      "contentTypes": [
+        "partials"
       ]
     },
     {

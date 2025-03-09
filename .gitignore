@@ -3,3 +3,4 @@
 .hugo_build.lock
 frontmatter.json
 resources/_gen
+/public

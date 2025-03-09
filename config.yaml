@@ -58,3 +58,7 @@ params:
       # Available values: auto, light, dark
       default: auto
 
+  sidebar:
+    avatar:
+      enabled: false
+

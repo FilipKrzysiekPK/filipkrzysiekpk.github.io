@@ -1,7 +1,7 @@
 ---
-title: "Języki i Paradygmaty Programowania II"
+title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
-date: 2023-28-11
+lastmod: 2025-03-09T19:42:07.870Z
 ---
 
 # Zakres
