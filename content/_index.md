@@ -18,4 +18,4 @@ Jestem asystentem badawczo dydaktycznym na Katedrze Informatyki Wydziału Inform
 
 ## Konsultacje kontakt
 
-Informacje znajdziesz [tutaj](/kontakt/)
+Informacje znajdziesz [tutaj](/page/kontakt/)

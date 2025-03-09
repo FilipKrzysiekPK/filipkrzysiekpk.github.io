@@ -1,5 +1,6 @@
 {
   "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.content.autoUpdateDate": true,
   "frontMatter.taxonomy.contentTypes": [
     {
       "name": "default",
@@ -24,9 +25,52 @@
           "isPublishDate": true
         },
         {
-          "title": "Content preview",
-          "name": "preview",
-          "type": "image"
+          "title": "Is in draft",
+          "name": "draft",
+          "type": "draft"
+        },
+        {
+          "title": "Categories",
+          "name": "categories",
+          "type": "categories"
+        },
+        {
+          "title": "layout",
+          "name": "layout",
+          "type": "string"
+        },
+        {
+          "title": "toc",
+          "name": "toc",
+          "type": "boolean"
+        },
+        {
+          "title": "lastmod",
+          "name": "lastmod",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "name": "post",
+      "pageBundle": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "date",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
         },
         {
           "title": "Is in draft",
@@ -34,25 +78,109 @@
           "type": "draft"
         },
         {
-          "title": "Tags",
-          "name": "tags",
-          "type": "tags"
+          "title": "Categories",
+          "name": "categories",
+          "type": "categories"
+        },
+        {
+          "title": "toc",
+          "name": "toc",
+          "type": "boolean"
+        },
+        {
+          "title": "layout",
+          "name": "layout",
+          "type": "string"
+        },
+        {
+          "title": "lastmod",
+          "name": "lastmod",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "name": "page",
+      "pageBundle": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "date",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
+        },
+        {
+          "title": "Is in draft",
+          "name": "draft",
+          "type": "draft"
         },
         {
           "title": "Categories",
           "name": "categories",
           "type": "categories"
+        },
+        {
+          "title": "layout",
+          "name": "layout",
+          "type": "string"
+        },
+        {
+          "title": "lastmod",
+          "name": "lastmod",
+          "type": "datetime"
         }
       ]
     }
   ],
   "frontMatter.framework.id": "hugo",
-  "frontMatter.content.publicFolder": "static",
+  "frontMatter.content.publicFolder": "staticFiles",
   "frontMatter.preview.host": "http://localhost:1313",
   "frontMatter.content.pageFolders": [
     {
       "title": "content",
       "path": "[[workspace]]/content"
+    },
+    {
+      "title": "post",
+      "path": "[[workspace]]/content/post"
+    },
+    {
+      "title": "Pages",
+      "path": "[[workspace]]/content/page",
+      "contentTypes": [
+        "page"
+      ]
+    },
+    {
+      "title": "jipp-ii-p-2025-n",
+      "path": "[[workspace]]/content/page/materials/jipp-ii-p-2025-n",
+      "contentTypes": [
+        "page"
+      ]
+    },
+    {
+      "title": "jipp-ii-2025-n",
+      "path": "[[workspace]]/content/page/materials/jipp-ii-2025-n",
+      "contentTypes": [
+        "page"
+      ]
+    }
+  ],
+  "frontMatter.content.grouping": [
+    {
+      "title": "Category",
+      "name": "categories"
     }
   ]
 }

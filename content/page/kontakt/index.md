@@ -1,12 +1,15 @@
 ---
-title: "Kontakt i konsultacje"
+title: Kontakt i konsultacje
 layout: singleNoHeader
 toc: false
 menu:
-    main: 
+    main:
         weight: -90
         params:
             icon: envelope-solid
+lastmod: 2025-03-09T16:01:32.073Z
+categories:
+    - pages
 ---
 
 # Kontakt
@@ -23,8 +26,9 @@ MS Teams:   Tutaj trzeba mnie wyszukać
 
 ## Konsultacje
 
-* **poniedziałek 7:45 - 8:45**/**12:15-13:15** Podchorążych, F020 (po wczrśniejszym umówieniu się)
-* **Środa 17:00 - 18:00** Katedra Informatyki, 144/10
+* **poniedziałe 15:15 - 16:15** Katedra Informatyki, 144/10 lub zdalnie (do ustalenia przez Teams)
+* **wtorek 10:00 - 11:00/16:00 - 17:00** Katedra Informatyki, 144/10 (do ustalenia przez Teams)
+* **środa 11:15 - 12:15** Podchorążych, F020 (po wczrśniejszym umówieniu się)
 * Inne terminy po kontakcie przez MS Teams
 
 Przed przyjściem na konsultacje **napisz wiadomość**!
