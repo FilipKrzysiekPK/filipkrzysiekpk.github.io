@@ -3,7 +3,7 @@ title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
 toc: false
-lastmod: 2025-03-09T20:04:47.527Z
+lastmod: 2025-03-10T15:44:29.927Z
 ---
 
 # Języki i Paradygmaty Programowania II
@@ -23,14 +23,14 @@ lastmod: 2025-03-09T20:04:47.527Z
 
 ### Lista laboratoriów
 
-| Nr  |               Data               |                                                                           Tematyka                                                                            |                  Materiały                  |
-| :-: | :------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------: |
-|  1  |                        | Zajęcia organizacyjne, różnice pomiędzy c i c++, stringi, alokacja pamięci, CMake, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII | [📄🔗](#) |
-|  2  |                         |              Konstruktor kopiujący, przekazywanie elementów do funkcji, dziedziczenie, polimorfizm, usuwanie i używanie domyślnego konstruktora               | [📄🔗](#) |
-|  3  |   |                                     Funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static, debugowanie                                      | [📄🔗](#) |
-|  4  |   |                                              Szablony, obsługa plików, konwersja typów                                                                        | [📄🔗](#) |
-|  5  |  |                                                                 Biblioteka STL, obsługa błędów, wyjątki, lambdy, RTTI                                         | [📄🔗](#) |
-|  6  |                                  |                                        Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu                                        | [📄🔗](#)                                            |
+| Nr  | Data |                                                                           Tematyka                                                                            |  Materiały  |
+| :-: | :--: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------: |
+|  1  |      | Zajęcia organizacyjne, różnice pomiędzy c i c++, stringi, alokacja pamięci, CMake, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII | [📄🔗](#) |
+|  2  |      |              Konstruktor kopiujący, przekazywanie elementów do funkcji, dziedziczenie, polimorfizm, usuwanie i używanie domyślnego konstruktora               | [📄🔗](#) |
+|  3  |      |                                     Funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static, debugowanie                                      | [📄🔗](#) |
+|  4  |      |                                                           Szablony, obsługa plików, konwersja typów                                                           | [📄🔗](#) |
+|  5  |      |                                                     Biblioteka STL, obsługa błędów, wyjątki, lambdy, RTTI                                                     | [📄🔗](#) |
+|  6  |      |                                        Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu                                        | [📄🔗](#) |
 
 
 

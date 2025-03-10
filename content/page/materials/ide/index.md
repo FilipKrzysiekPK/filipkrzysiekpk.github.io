@@ -1,6 +1,8 @@
 ---
-title: "Środowiska programistyczne"
+title: Środowiska programistyczne
 layout: singleNoHeader
+toc: false
+lastmod: 2025-03-10T16:05:56.515Z
 ---
 
 # Środowiska programistyczne
@@ -22,6 +24,7 @@ Popularność różnych środowisk programistycznych można sprawdzić w poniżs
 - [JetBrains devecosystem 2023](https://www.jetbrains.com/lp/devecosystem-2023/cpp/)
 - [ISO cpp: 2022 Annual c++ Developer Survey "Lite"](https://isocpp.org/blog/2022/06/results-summary-2022-annual-cpp-developer-survey-lite)
 - [ISO cpp: 2023 Annual c++ Developer Survey "Lite"](https://isocpp.org/blog/2023/04/results-summary-2023-annual-cpp-developer-survey-lite)
+- [ISO cpp: 2024 Annual c++ Developer Survey "Lite"](https://isocpp.org/blog/2024/04/results-summary-2024-annual-cpp-developer-survey-lite)
 
 {{< space 8 >}}
 

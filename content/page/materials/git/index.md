@@ -1,6 +1,7 @@
 ---
-title: "Wprowadzenie do githuba"
+title: Wprowadzenie do githuba
 layout: singleNoHeader
+lastmod: 2025-03-10T16:39:27.612Z
 ---
 
 # Wprowadzenie do githuba
@@ -144,3 +145,12 @@ Należy utworzyć plik `.gitignore`. Wewnątrz niego definiujemy, które pliki m
    2. Dodawanie zmian do commita
    3. Tworzenie commita
 3. Przesyłanie zmian z lokalnego repozytorium do zdalnego
+
+
+{{< space 5 >}}
+
+---
+
+## Gdy coś pójdzie nie tak
+
+[Pomocna strona](https://dangitgit.com/pl) gdy cos pójdzie nie tak. Znajdziesz na niej wskazówki, co zrobić, aby uratować napisany kod i nie musieć ponownie klonować repozytorium. Istnieje też inna odmiana tej strony 😉.

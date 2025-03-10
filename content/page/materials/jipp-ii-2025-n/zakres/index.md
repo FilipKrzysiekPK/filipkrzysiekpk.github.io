@@ -1,7 +1,9 @@
 ---
-title: "Języki i Paradygmaty Programowania II"
+title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
+toc: false
+lastmod: 2025-03-10T16:04:00.049Z
 ---
 
 # Zakres
@@ -30,13 +32,13 @@ date: 2024-03-10
 
 ## Dodatkowe tematy
 
-|          Temat          | Poruszone na zajęciach |
-| :---------------------: | :--------------------: |
-|     Podstawy CMake      |                       |
-|       Debugowanie       |                        |
-| Przekazywanie parametru |                       |
-|         Wyjątki         |                       |
-|         Static          |                        |
-|         Lambda          |                       |
-| Parametry uruchomienia programu | |
+|              Temat              | Poruszone na zajęciach |
+| :-----------------------------: | :--------------------: |
+|         Podstawy CMake          |                        |
+|           Debugowanie           |                        |
+|     Przekazywanie parametru     |                        |
+|             Wyjątki             |                        |
+|             Static              |                        |
+|             Lambda              |                        |
+| Parametry uruchomienia programu |                        |
 
