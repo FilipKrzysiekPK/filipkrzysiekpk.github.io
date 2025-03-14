@@ -3,7 +3,7 @@ title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
 toc: false
-lastmod: 2025-03-10T15:44:29.927Z
+lastmod: 2025-03-14T17:16:16.810Z
 ---
 
 # Języki i Paradygmaty Programowania II
@@ -25,7 +25,7 @@ lastmod: 2025-03-10T15:44:29.927Z
 
 | Nr  | Data |                                                                           Tematyka                                                                            |  Materiały  |
 | :-: | :--: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------: |
-|  1  |      | Zajęcia organizacyjne, różnice pomiędzy c i c++, stringi, alokacja pamięci, CMake, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII | [📄🔗](#) |
+|  1  |      | Zajęcia organizacyjne, różnice pomiędzy c i c++, stringi, alokacja pamięci, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII | [📄🔗](/page/materials/jipp-ii-2025-n/z1) |
 |  2  |      |              Konstruktor kopiujący, przekazywanie elementów do funkcji, dziedziczenie, polimorfizm, usuwanie i używanie domyślnego konstruktora               | [📄🔗](#) |
 |  3  |      |                                     Funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static, debugowanie                                      | [📄🔗](#) |
 |  4  |      |                                                           Szablony, obsługa plików, konwersja typów                                                           | [📄🔗](#) |
