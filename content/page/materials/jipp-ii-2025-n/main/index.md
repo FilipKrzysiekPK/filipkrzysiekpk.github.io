@@ -3,21 +3,21 @@ title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
 toc: false
-lastmod: 2025-03-14T17:16:16.810Z
+lastmod: 2025-03-15T06:48:12.395Z
 ---
 
 # Języki i Paradygmaty Programowania II
 
-### Przydatne materiały
+## Organizacyjne
 
+* [Warunki zaliczenia przedmiotu](/2025/JiPP2_2025_WarunkiZaliczeniaPrzedmiotu-lab.pdf)
+* [Zakres materiału](/page/materials/jipp-ii-2025-n/zakres/)
+
+
+### Przydatne materiały
 
 * [Środowiska programistyczne](/page/materials/ide)
 
-{{< space 5 >}}
-
-### Zakres materiału
-
-[Zakres materiału](/page/materials/jipp-ii-2025-n/zakres/)
 
 {{< space 5 >}}
 

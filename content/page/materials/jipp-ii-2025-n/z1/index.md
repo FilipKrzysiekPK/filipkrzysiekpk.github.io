@@ -5,7 +5,7 @@ date: 2023-10-20
 toc: true
 categories:
     - jipp2-2025-n
-lastmod: 2025-03-14T17:01:17.614Z
+lastmod: 2025-03-15T06:54:00.558Z
 ---
 
 
@@ -15,11 +15,9 @@ lastmod: 2025-03-14T17:01:17.614Z
 
 * Podstawy teoretyczne - źródła wiedzy
 * Zmiany pomiędzy c i c++
-* Struktura projektu (układ katalogów)
 * Strumienie wejścia wyjścia
 * Alokacja pamięci
 * Przypomnienie wiadomości
-* CMake
 * Obiektowość, klasy
 * Konstruktory
 * Gettery oraz settery
@@ -501,7 +499,37 @@ Zasady tworzenia destruktora są podobne do konstruktora. Nazwa destruktora zacz
 > Konstruktor alokuje elementy i odpowiednio inicjalizuje składowe obiektu klasy `Vector`. Destruktor z kolei dealokuje te elementy. Ten model uchwytu do danych jest powszechnie wykorzystywany podczas pracy ze zbiorami danych, których rozmiar może się zmieniać w czasie istnienia obiektu.
 > Technika zajmowania zasobów za pomocą konstruktora i zwalniania ich za pomocą destruktora, zwana RAII (ang. Resource Acquisition Is Initialization - zajęcie zasobów oznacza inicjalizacjeę), pozwala wyeliminować "gołe operacje `new`", czyli uniknąć alokacji w ogólnym kodzie i ukryć je w logicznie zaimplementowanej abstrakcji. Analogicznie należy też unikać "gołych operacji `delete`". Im mniej gołych operacji `new` i `delete` w kodzie, tym mniejsze ryzyko popełnienia błędu i łatwiej unikać wycieków pamięci (13.2)
 
+*C++ Podróż po języku dla zaawansowanych*
+
 [Wikipedia](https://pl.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)
+
+{{< space 7 >}}
+
+## Kontenery
+
+Najczęściej w c dynamicznie alokowane tablice były wykorzystywane do tworzenia tablic, których rozmiaru nie znaliśmy na etapie kompilacji programu. Język c++ udostępnia "inteligentne tablice", które są nazywane kontenerami. Najpopularniejszym z nich jest `vector` oraz `map`a.
+
+Vextor to taka, tablica, która dynamicznie zmienia swój rozmiar dostosowując swoją pojemność, tak aby zmieścić wszystkie elementy. Jeżeli chcemy dodać nowy element do tego kontenera, to musimy użyć specjalnych metod: `insert`, albo `push_back`. Dostęp i modyfikowanie elementów odbywa się na taki sam sposób, jak w zwykłej tablicy. Poniżej przedstawione zostało przykładowe zastosowanie.
+
+```cpp
+#include <vector>
+// ...
+vector<int> myTab;
+myTab.push_bask(10);
+myTab.push_bask(11);
+myTab.push_bask(12);
+myTab.push_bask(13);
+
+cout << myTab.size() << " myTab[0]" << myTab[0] << endl;
+```
+
+Oczywiście istnieje też wiele innych metod, które pozwalają operować na tym kontenerze, można z nimi się zapoznać w [dokumentacji](https://en.cppreference.com/w/cpp/container/vector).
+
+{{< space 3 >}}
+
+Drugi kontener, który omówię już tylko w dwóch zdaniach, to `map`a. Tutaj wartości przechowujemy na zasadzie klucz - wartość, gdzie klucz i wartość mogą być dowolnego typu. Więcej informacji można znaleźć w [dokumentacji](https://en.cppreference.com/w/cpp/container/map).
+
+[Dokumentacja wszystkich kontenerów w c++.](https://en.cppreference.com/w/cpp/container)
 
 {{< space 7 >}}
 
