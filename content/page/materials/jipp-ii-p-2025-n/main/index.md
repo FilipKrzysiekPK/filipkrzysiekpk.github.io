@@ -3,10 +3,10 @@ title: Języki i Paradygmaty Programowania Projekt
 layout: singleNoHeader
 date: 2025-03-09T14:42:08.865Z
 toc: false
-lastmod: 2025-03-23T06:57:02.095Z
+lastmod: 2025-03-23T07:46:40.181Z
 categories:
     - jipp-p-2025-n
-draft: true
+draft: false
 ---
 
 # Języki i Paradygmaty Programowania Projekt
