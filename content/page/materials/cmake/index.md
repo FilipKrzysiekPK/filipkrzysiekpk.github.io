@@ -3,8 +3,8 @@ title: CMake - wprowadzenie
 layout: singleNoHeader
 date: 2024-03-10
 toc: true
-lastmod: 2025-03-23T06:52:54.185Z
-draft: true
+lastmod: 2025-03-23T08:49:15.539Z
+draft: false
 ---
 
 # CMake - wprowadzenie

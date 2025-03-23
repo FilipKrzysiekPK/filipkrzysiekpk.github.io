@@ -3,7 +3,7 @@ title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
 toc: false
-lastmod: 2025-03-15T06:48:12.395Z
+lastmod: 2025-03-23T08:52:09.836Z
 ---
 
 # Języki i Paradygmaty Programowania II
@@ -12,6 +12,10 @@ lastmod: 2025-03-15T06:48:12.395Z
 
 * [Warunki zaliczenia przedmiotu](/2025/JiPP2_2025_WarunkiZaliczeniaPrzedmiotu-lab.pdf)
 * [Zakres materiału](/page/materials/jipp-ii-2025-n/zakres/)
+
+**Kurs na delcie**
+
+[Języki i Paradygmaty Programowania cz. 2 2024/25](https://delta.pk.edu.pl/course/view.php?id=5979)
 
 
 ### Przydatne materiały
