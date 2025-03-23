@@ -3,7 +3,7 @@ title: Języki i Paradygmaty Programowania Projekt
 layout: singleNoHeader
 date: 2025-03-09T14:42:08.865Z
 toc: false
-lastmod: 2025-03-10T16:34:11.896Z
+lastmod: 2025-03-23T06:57:02.095Z
 categories:
     - jipp-p-2025-n
 draft: true
@@ -17,6 +17,7 @@ draft: true
 * [Środowiska programistyczne](/page/materials/ide)
 * [Podstawy obsługi gita](/page/materials/git)
 * [Podstawy obsługi CMake](/page/materials/cmake)
+* [Struktura projektu c++](/page/materials/jipp-ii-p-2025-n/proj-structure)
 
 {{< space 5 >}}
 
