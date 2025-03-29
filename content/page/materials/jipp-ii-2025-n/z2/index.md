@@ -1,7 +1,10 @@
 ---
-title: "Języki i Paradygmaty Programowania II laboratorium 2"
+title: Języki i Paradygmaty Programowania II laboratorium 2
 layout: singleNoHeader
 date: 2023-10-25
+lastmod: 2025-03-29T12:53:07.113Z
+categories:
+    - jipp2-2025-n
 ---
 
 # Laboratorium 2
@@ -17,33 +20,60 @@ date: 2023-10-25
 
 {{< space 7 >}}
 
-# Kontenery
+## Badanie wydajności
 
-Najczęściej w c dynamicznie alokowane tablice były wykorzystywane do tworzenia tablic, których rozmiaru nie znaliśmy na etapie kompilacji programu. Język c++ udostępnia "inteligentne tablice", które są nazywane kontenerami. Najpopularniejszym z nich jest `vector` oraz `map`a.
-
-Vextor to taka, tablica, która dynamicznie zmienia swój rozmiar dostosowując swoją pojemność, tak aby zmieścić wszystkie elementy. Jeżeli chcemy dodać nowy element do tego kontenera, to musimy użyć specjalnych metod: `insert`, albo `push_back`. Dostęp i modyfikowanie elementów odbywa się na taki sam sposób, jak w zwykłej tablicy. Poniżej przedstawione zostało przykładowe zastosowanie.
+Poniżej znajduje się archiwum z plikami zawierającymi klasę służącą do mierzenia czasu oraz plik main z zainicjalizowanym generatorem liczb pseudolosowych. Przykład użycia:
 
 ```cpp
-#include <vector>
-// ...
-vector<int> myTab;
-myTab.push_bask(10);
-myTab.push_bask(11);
-myTab.push_bask(12);
-myTab.push_bask(13);
+    ElapsedTimer elTimer;
+    elTimer.start();
+    //do sth
 
-cout << myTab.size() << " myTab[0]" << myTab[0] << endl;
+    elTimer.stop();
+
+    cout << "Elapsed: " << elTimer.elapsedInUs() << " us.\n";
 ```
 
-Oczywiście istnieje też wiele innych metod, które pozwalają operować na tym kontenerze, można z nimi się zapoznać w [dokumentacji](https://en.cppreference.com/w/cpp/container/vector).
+Klasa posiada także możliwość obliczania średniej zmierzonych czasów. Resetu zliczania można dokonać za pomocą metody `reset()`:
+
+```cpp
+    ElapsedTimer elTimer;
+    for (int i = 0; i < 1000; ++i) {
+        elTimer.start();
+        //do sth
+
+        elTimer.stop();
+    }
+
+    cout << "Avg. elapsed: " << elTimer.getAverageTimeInUs() << " us.\n";
+```
+
+Zwracany czas może być w:
+
+* nanosekundach (`getAverageTimeInNs` i `elapsedInNs`)
+* mikrosekundach (`getAverageTimeInUs` i `elapsedInUs`)
+* milisekundach (`getAverageTimeInMs` i `elapsedInMs`)
 
 {{< space 3 >}}
 
-Drugi kontener, który omówię już tylko w dwóch zdaniach, to `map`a. Tutaj wartości przechowujemy na zasadzie klucz - wartość, gdzie klucz i wartość mogą być dowolnego typu. Więcej informacji można znaleźć w [dokumentacji](https://en.cppreference.com/w/cpp/container/map).
+**Uwaga to są tylko pliki źródłowe, należy je dodać do projektu**
 
-[Dokumentacja wszystkich kontenerów w c++.](https://en.cppreference.com/w/cpp/container)
+[Pobierz](/simpleTimer.zip)
 
-{{< space 7 >}}
+### Na co zwrócić uwagę przy badaniu wydajności
+
+Podczas badania wydajności działania aplikacji należy zwrócić uwagę, aby była ona kompilowana w trybie release. Najważniejszą rzeczą, jest wielokrotne powtarzanie badanego scenariusza, ponieważ podczas pojedynczej próby czas procesora może zostać zajęty przez inną aplikację, co zaburzy wyniki.
+
+## Kontenery - badanie wydajności
+
+Przebadaj wydajność zapełniania kontenera w różne sposoby. Badanym kontenerem będzie `std::vector<double>`, który przechowuje liczby zmiennoprzecinkowe podwójnej precyzji. Porównaj czas wypełniania kontenera 1 000 000 liczbami pseudolosowymi dla przypadków:
+
+* wypełnianie za pomocą `push_back`, kompilacja w trybie debug
+* wypełnianie za pomocą `push_back`, kompilacja w trybie release
+* najpierw zarezerwowanie miejsca ([`reserve`](https://en.cppreference.com/w/cpp/container/vector/reserve)), a następnie wypełnianie za pomocą `push_back`, kompilacja w trybie debug
+* najpierw zarezerwowanie miejsca ([`reserve`](https://en.cppreference.com/w/cpp/container/vector/reserve)), a następnie wypełnianie za pomocą `push_back`, kompilacja w trybie release
+
+{{< space 5 >}}
 
 ## Przekazywanie obiektów do funkcji
 
@@ -87,15 +117,80 @@ Jeszcze raz podkreślam, dla optymalizacji nie przekazujemy typów prostych prze
 
 {{< space 5 >}}
 
+### Realne porównanie wydajności
+
+Korzystając z wcześniej przeprowadzonych testów stwórz funkcję sumującą wszystkie elementy wewnątrz kontenera, a następnie zwracającą wynik tego działania. Przetestuj wydajność przy przekazywaniu kontenera przez:
+
+* kopię
+* stałą referencję
+* wskaźnik
+
+Badania dokonuj kompilując w trybie release.
+
+{{< space 5 >}}
+
 ## Konstruktory kopiujące
 
-Zanim zaczniemy omawiać tematykę konstruktorów kopiujących przetestujmy działanie kodu znajdującego
-się na delcie.
+Zanim zaczniemy omawiać tematykę konstruktorów przebadajmy to zjawisko. Naszym scenariuszem testowym będzie:
+
+* stworzenie punktu `p1`
+* stworzenie punktu `p2` na podstawie `p1`
+* wyświetlenie punktów
+* zmodyfikowanie punktu `p1`
+* wyświetlenie punktów
+
+Pierwszą badana klasa punktu: 
+
+```cpp
+class PointXY {
+    double x;
+    double y;
+
+public:
+    PointXY(double x, double y): x(x), y(y) {}
+
+    void print() {
+        cout << "x: " << x << "   y: " << y << endl;
+    }
+
+    void updatePoint(double x, double y) {
+        this->x = x;
+        this->y = y;
+    }
+};
+```
+
+Druga badana klasa:
+
+```cpp
+class Point {
+    double *cords;
+    const unsigned size;
+
+public:
+    Point(unsigned size): size(size) {
+        cords = new double[size];
+    }
+
+    void print() {
+        for (unsigned i = 0; i < size; ++i) {
+            cout << i << ": " << cords[i] << endl;
+        }
+    }
+
+    void updatePoint(unsigned index, double value) {
+        cords[index] = value;
+    }
+};
+```
 
 Jakie anomalie zauważyłeś?{{< rawhtml >}}<sup id="answear1Sourece">{{< /rawhtml >}}[1](#answear1){{< rawhtml >}}</sup>{{< /rawhtml >}}
 
-Dodaj destruktor, który będzie zwalniał pamięć (dla `x` i `y`). Co się stało? Czy program działa poprawnie i
-dlaczego?{{< rawhtml >}}<sup id="answear2Sourece">{{< /rawhtml >}}[2](#answear2){{< rawhtml >}}</sup>{{< /rawhtml >}}
+Uruchom błędnie działający przykład w trybie debugowania, w którym miejscu jest wyrzucany błąd?
+
+Dopisz destruktor, z wypisaniem informacji, że jest niszczony obiekt.
+
+Dodaj do destruktora, zwalnianie pamięci dla zmiennej `cords`. Co się stało? Czy program działa poprawnie i dlaczego?{{< rawhtml >}}<sup id="answear2Sourece">{{< /rawhtml >}}[2](#answear2){{< rawhtml >}}</sup>{{< /rawhtml >}}
 
 ### Deklaracja
 
@@ -149,25 +244,21 @@ public:
 };
 ```
 
+### Czy muszę kopiować wszystkie wartości, czy mogę zadeklarować kopię tylko tych, które dobrze się nie skopiują
+
+Najlepiej jest zdefiniować skopiowanie wszystkich elementów. [Dłuższa odpowiedź](https://stackoverflow.com/questions/70911220/c-copy-constructors-must-i-spell-out-all-member-variables-in-the-initializer)
+
 {{< space 7 >}}
 
-## Zadania do wykonania na zajęciach
+### Zadanie
 
-**Zadanie 1** 
-
-Popraw implementację z przykładu 1 na delcie.
-
-**Zadanie 2**
-
-Do zadania z poprzednich zajęć (z `Polygon`) dodaj konstruktor kopiujący.
-
-**Zadanie 3**
+Popraw implementację powyższych przykładów, aby działały poprawnie.
 
 {{< space 7 >}}
 
 ## Przenoszenie
 
-Czy zawsze musimy kopiowiać obiekt? Co gdy przykładowo go zwracamy z jakiejś funkcji? Wtedy bo zrobieniu jego kopii zostanie on zniszczony. W takim przypadku najczęściej zostanie on przeniesiony. Jednakże jest to materiał wykraczający poza zakres laboratorium i poniżej pokazuję jedynie deklarację takiego konstruktora. (Z tym tematem będzie też powiązane lvalue oraz rvalue.)
+Czy zawsze musimy kopiować obiekt? Co gdy przykładowo go zwracamy z jakiejś funkcji? Wtedy bo zrobieniu jego kopii zostanie on zniszczony. W takim przypadku najczęściej zostanie on przeniesiony. Jednakże jest to materiał wykraczający poza zakres laboratorium i poniżej pokazuję jedynie deklarację takiego konstruktora. (Z tym tematem będzie też powiązane lvalue oraz rvalue.)
 
 ```cpp
 class TestClass {
@@ -196,7 +287,7 @@ public:
 
 ## Dziedziczenie
 
-Dziedziczenie, jak mówi słownik języka polskiego, dziedziczyć, to otrzymywać coś w spadku. W programowaniu też ma to zastosowanie, ponieważ klasę bazową może odziedziczyć inna klasa i otrzyma od niej wszystkie pola i metody, które były w przestrzeni `protected` i `public`. Można określić to inaczej, dziedziczenie, to rozszerzanie, ale nie tylko. Przeanalizujmy poniższe klasy. Przeanalizujmy poniższy przykład.
+Dziedziczenie, jak mówi słownik języka polskiego, dziedziczyć, to otrzymywać coś w spadku. W programowaniu też ma to zastosowanie, ponieważ klasę bazową może odziedziczyć inna klasa i otrzyma od niej wszystkie pola i metody, które były w przestrzeni `protected` i `public`. Można określić to inaczej, dziedziczenie, to rozszerzanie, ale nie tylko. Przeanalizujmy poniższe klasy.
 
 ```c++
 class Student {
@@ -247,11 +338,11 @@ public:
 };
 ```
 
-Dostrzegłeś coś? Mają one części wspólne. Pierwszą częścią, która się powtarza wszędzie jest `string firstName, lastName;` i `void printPerson();`. Stwórzmy z tego osobną klasę, która będzie takim ogólnikiem i będzie przechowywać podstawowe informacje o osobie, będzie się ona nazywać `Person`.
+Dostrzegłeś coś? Mają one części wspólne. Pierwszą częścią, która się powtarza wszędzie jest `string firstName, lastName;` i `void printPerson();`. Stwórzmy z tego osobną klasę, która będzie takim ogólnikiem i będzie przechowywać podstawowe informacje o osobie, nazwijmy ją `Person`.
 
 `Student` zawiera tylko pola z klasy `Person` i jakieś swoje, które są charakterystyczne dla tej klasy. Spójrz teraz na klasę `Worker` i `Teacher`. Mają one znowu te same pola. Zróbmy to samo co wcześniej, czyli wyłączmy z klasy `Teacher` i `Worker` część wspólną tych klas. Wyszło na to, że to będzie cała klasa `Worker`, niech tak zostanie. Czyli `Teacher` będzie specjalizował klasę `Worker`.
 
-Podsumujmy stworzyliśmy klasę bazową `Person`, po której dziedziczą klasy `Student` i `Worker`. Następnie Stworzyliśmy dziedziczenie `Teachera` z `Workera`. Zobacz poniżej, jak będzie to wyglądać.
+Podsumujmy stworzyliśmy klasę bazową `Person`, po której dziedziczą klasy `Student` i `Worker`. Następnie Stworzyliśmy dziedziczenie `Teacher`-a z `Worker`-a. Zobacz poniżej, jak będzie to wyglądać.
 
 ```c++
 class Person {
@@ -311,7 +402,7 @@ No nie do końca. Tym przypisaniem weszliśmy już w tematykę polimorfizmu.
 # Polimorfizm statyczny
 
 Polimorfizm statyczny jest to poniekąd przeciążanie metod i operatorów. Program już na etapie kompilacji będzie wiedział, co zostanie wybrane do działania. 
-Poznaliśmy już wcześniej przeciążenia funkcji, czy możemy zrobić takie przeciążenia w klasach? Oczywiście, że tak, a nawet możemy pójść o krok dalej. Możemy w klasie bazowej stworzyć metodę, a w klasie pochodne stworzyć dosłownie taką samą metodę (w znaczeniu z takimi samymi argumentami, ale inną zawartością ciała, bo nie ma sensu robić dosłownie tego samego 2 razy), tylko że w tym przypadku ona przesłoni metodę z klasy bazowej.
+Poznaliśmy już wcześniej przeciążenia funkcji, czy możemy zrobić takie przeciążenia w klasach? Oczywiście, że tak, a nawet możemy pójść o krok dalej. Możemy w klasie bazowej stworzyć metodę, a w klasie pochodnej stworzyć dosłownie taką samą metodę (w znaczeniu z takimi samymi argumentami, ale inną zawartością ciała, bo nie ma sensu robić dosłownie tego samego 2 razy), tylko że w tym przypadku ona przesłoni metodę z klasy bazowej.
 
 ```cpp
 class Elephant {
@@ -330,8 +421,7 @@ public:
 ```
 
 Tak, tak ten przykład nie ma dużo sensu patrząc na dziedziczenie, ale skupmy się na przeciążonej metodzie. Jeżeli stworzymy obiekt typu `Elephant`, to na ekranie co uzyskamy? `I'm Elephant!`, a jeżeli stworzymy obiekt typu `SmallElephant`, to co uzyskamy na ekranie? `I'm small Elephant!`.
-<br>
-Jak można zauważyć w przeciążonej metodzie doszło słowo `override`, służy ono do tego, aby kompilator nas sprawdził, czy nie zrobiliśmy jakiejś literówki, albo błędu chcąc nadpisać poprzednią deklarację metody w klasie bazowej.
+
 
 {{< space 7 >}}
 
@@ -345,7 +435,7 @@ Najprościej rzecz ujmując możemy przechowywać w obiekcie typu klasy bazowej,
 Figure *fig = new Circle();
 ```
 
-Polimorfizm działa tylko i wyłącznie ze wskaźnikami i referencją
+Polimorfizm działa tylko i wyłącznie ze wskaźnikami lub referencją
 
 ```c++
 Rectangle rect = new Rectangle();
@@ -360,7 +450,7 @@ Przykładem niech będzie `Figure`.
 
 # Funkcje wirtualne
 
-Sprobujmy w sposób eksperymentalny dowiedzieć się czym są funkcje wirtualne. Pobierz przykład 2 z delty, a następnie przeanalizuj, jak działa program. Czy działa on poprawnie?
+Sprobujmy w sposób eksperymentalny dowiedzieć się czym są funkcje wirtualne. [Pobierz projekt z przykładem](/Polimorfizm.zip), a następnie przeanalizuj, jak działa program. Działa on poprawnie?
 
 Dodaj słowo kluczowe `virtual` przed destruktor oraz metodę `print` w klasie `Base`. Co to zmieniło w działaniu programu?
 
@@ -413,21 +503,33 @@ virtual void virtualMethod() = 0;
 
 **Zadanie 1**
 
+Stwórz klasę `MyString`, będzie ona przechowywać tekst w tablicy `char`. Zaimplementuj konstruktor inicjalizujący nasz string za pomocą `std::string` (dla ułatwienia). Dodaj metodę `print` wypisującą na ekran zawartość.
+
+Zaimplementuj następnie odpowiednie dodatkowe metody, aby nie występowały wycieki pamięci oraz inne problemy.
+
+**Zadanie 2**
+
 Wybierz dowolny przykład klasy ogólnej (Figura, osoba, pojazd itp), stwórz ją, a następnie stwórz 2 klasy pochodne.
 
 {{< br >}}
 
-**Zadanie 2**
+**Zadanie 3**
 
-Stwórz klasę służącą do przechowywania współrzędnych geograficznych (może być tylko w stopniach). Dodaj odpowiednie metody (według uznania).
+Stwórz klasę `Logger`, która będzie posiadać wirtualne metody:
 
-Dodaj klasę, która będzie umożliwiała przechowywanie tych współrzędnych przyjmując wartości z innego systemu. Będą one obliczane według następującego wzoru, gdzie `number` to wartość współrzędnej z innego systemu, a `deg` to wartość w stopniach.
+* `warning(string)` - dodawanie wpisu na poziomie ostrzeżenia
+* `error(string)` - dodawanie wpisu na poziomie błędu
 
-> deg = number / 3600000
+Następnie stwórz 2 klasy dziedziczące:
+
+* `ConsoleLogger` - wszystkie logi będą wyrzucane do konsoli za pomocą `cout`
+* `FileLogger` - wszystkie logi będą wyrzucane do pliku, ale my dla ułatwienia wyrzucimy je do `cout` z dopiskiem `To file: `
+
+Stwórz następnie obiekty tych loggerów.
 
 {{< br >}}
 
-**Zadanie 3**
+**Zadanie 4**
 
 Stwórz klasę abstrakcyjną `Task`, ktora będzie posiadać metode czysto wirtualną `void runTask()`.
 
