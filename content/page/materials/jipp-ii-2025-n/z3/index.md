@@ -1,400 +1,710 @@
 ---
-title: "Języki i Paradygmaty Programowania II laboratorium 3"
+title: Języki i Paradygmaty Programowania II laboratorium 3
 layout: singleNoHeader
-date: 2023-11-03
+date: 2023-04-18
+lastmod: 2025-04-05T19:05:01.477Z
 ---
 
 # Laboratorium 3
 
-### Cele laboratorium i poruszane zagadnienia
+## Cele laboratorium i poruszane zagadnienia
 
-* metody const
-* zmienne i metody statyczne
-* inline functions
-* przeciążanie operatorów
-* funkcje zaprzyjaźnione
+* szablony funkcji
+* szablony klas
+* konwersje
+* obsługa plików
 
 {{< space 7 >}}
 
-## Stałe metody
+## Dziedziczenie, uzupełnienie informacji
 
-Do tej pory wszystkie metody, jakie tworzyliśmy oznaczaliśmy co najwyżej słowem kluczowym `override`, albo `virtual`. Teraz dodamy kolejne słowo kluczowe, które już wszyscy doskonale znamy, `const`.
-Po co oznaczać metodę, jako `const`? Dajemy w ten sposób informację kompilatorowi, że nie będziemy modyfikować żadnych pól/atrybutów klasy. Oczywiście kompilator nam nie ufa i nas sprawdzi. Jednakże kluczową funkcjonalnością w tym przypadku jest, gdy będziemy chcieli użyć stałego obiektu naszej klasy. Jeżeli jest ona stała, to nie możemy modyfikować w żaden sposób jej zawartości. Gdy nie oznaczymy metody jako `const`, to skąd obiekt ma wiedzieć, że nie modyfikujemy zawartości klasy? Właśnie po to się to robi 😊.
+Przeanalizuj poniższy kod. Jakiego wyjścia się spodziewasz?
 
-```cpp
-// .h/.hpp file
-class Example {
-public:
-    void unnecessary() const;
-};
+W klasie B i C po `:` dodaj słówko `virtual`, sprawdź wynik.
 
-// .cpp file
-Example::unnecessary() const {
-    cout << "Jestem całkowicie niepotrzebną klasą i metodą stworzoną tylko i wyłącznie na potrzeby tego przykładu" << endl;
-}
-```
+{{< rawhtml >}}
 
-{{< space 5 >}}
+<script src="//onlinegdb.com/embed/js/tkw7G-rec?theme=dark"></script>
 
-## Inline functions
-
-Do zrozumienia problematyki posłużymy się [aplikacją zamieniającą kod na assembler](https://godbolt.org/).
-
-Wklej następujący kod i przeanalizuj, czy są jakieś różnice pomiędzy metodą `inline`, a zwykłą.
-
-```cpp
-class Point
-{
-public:
-    // Define "accessor" functions as
-    //  reference types.
-    unsigned& x();
-    unsigned& y();
-private:
-    unsigned _x;
-    unsigned _y;
-};
-
-inline unsigned& Point::x()
-{
-    return _x;
-}
-unsigned& Point::y()
-{
-    return _y;
-}
-int main()
-{
-    Point p1;
-    p1.x();
-    p1.y();
-    return 0;
-}
-```
-
-Można zauważyć, że w metodzie `y()` jest wykonywana dodatkowa operacja. Może to nie przedstawiać całości działania tej funkcjonalności, ponieważ następuje tutaj kompilacja w trybie debugowania, a nie z włączonymi optymalizacjami.
-
-Bardziej teoretycznie patrząc na temat, `inline functions` powinny działać troszkę szybciej od zwykłych, ponieważ ich zawartość powinna zostać wklejona w miejsce ich wywołania. Oczywiście nie jest aż tak kolorowo, ponieważ to kompilator zdecyduje, jak to będzie działać. Funkcje `inline` powinny być stosunkowo małe. Będziemy to stosować w przypadku, gdy walczymy o bardzo mocne zoptymalizowanie naszej aplikacji i liczy się każda operacja.
-
-Uwaga, funkcje inline muszą zostać zaimplementowane w pliku nagłówkowym.
-
-[Przykładowe omówienie tematu](https://pl.wikibooks.org/wiki/C%2B%2B/Funkcje_inline)
-
-{{< space 5 >}}
-
-## Zmienne statyczne
-
-Zmiennych statycznych nie da się uniwersalnie opisać, należy popatrzeć, gdzie są one używane. Ich częścią wspólną, to, że zmienna jest umieszczana w innej części pamięci (porównywalnej do tej globalnej).
-
-### Zmienne statyczne w funkcjach
-
-Tym razem przed opisaniem zagadnienia uruchom poniższy program i sprawdź, jak działa.
-
-```cpp
-int counter() {
-    static int i = 0;
-    ++i;
-    return i;
-}
-
-int main() {
-    cout << "Wywołanie 1: " << counter() << endl;
-    cout << "Wywołanie 2: " << counter() << endl;
-    cout << "Wywołanie 3: " << counter() << endl;
-    cout << "Wywołanie 4: " << counter() << endl;
-    cout << "Wywołanie 5: " << counter() << endl;
-    cout << "Wywołanie 6: " << counter() << endl;
-    return 0;
-}
-```
-
-Jak możemy zauważyć każde kolejne wywołanie funkcji `counter` zwiększało wartość `i` o 1. Zmienna ta nie była usuwana przy wychodzeniu z funkcji.
-
-Właśnie na tym polegają zmienne statyczne. Jest ona tworzona jeden raz i usuwana, dopiero wraz z końcem działania programu. Jej działanie można przyrównać do zmiennej globalnej, lecz dostęp do niej jest tylko i wyłącznie z funkcji, w której została stworzona i **zainicjowana**.
+{{< /rawhtml>}}
 
 {{< space 4 >}}
 
-### Zmienne statyczne w klasach
+## Konwersja typów
 
-Jak się zapewne możemy domyślić, zmienne statyczne w klasach będą działać podobnie, jednakże trzeba tu kilka rzeczy dopowiedzieć. Po pierwsze zmienna statyczna jest współdzielona pomiędzy obiektami. Jeżeli stworzymy 10 obiektów naszej klasy, to wszystkie będą miały taką samą wartość zmiennej statycznej, po zmodyfikowaniu jej w jednej klasie, zmodyfikuje się we wszystkich. Po drugie zmienną statyczną należy zainicjalizować poza klasą. Po trzecie Możemy korzystać ze zmiennej statycznej klasy bez tworzenia obiektu klasy. Zobaczmy przykład dla dwóch pierszych przypadków.
+Konwersja typów jest to bardzo potrzebne narzędzie, pozwala nam bezproblemowo zamieniać przykładowo liczbę całkowitą na zmiennoprzecinkową. W c++ występuje niejawna konwersja typów, czyli my nie musimy mówić dosłownie "Hej skonwertuj mi tę wartość na liczbę zmiennoprzecinkową". Jest to plus, a zarazem minus, może ona też w szczególnych przypadkach powodować różne błędy.
 
-```cpp
-class Foo {
-    static int myInt;
+### Niejawna konwersja typów
 
-public:
-    void print() {
-        cout << myInt << endl;
-    }
+Jest to automatyczna konwersja typu, która wykonuje się gdy typy "argumentów" są niezgodne. Dokonywana jest ona do typów wyższych zgodnie z kolejnością:
 
-    void updateMyInt(int n) {
-        myInt += n;
-    }
-};
+> bool -> char -> short int -> int -> unsigned int -> long int -> unsigned long int -> long long int -> float -> double -> long double 
 
-int Foo::myInt = 100;
-
-int main() {
-    Foo k1;
-    Foo k2;
-    Foo k3;
-    Foo k4;
-    Foo k5;
-
-    k1.print();
-    k2.print();
-    k3.print();
-    k4.print();
-    k5.print();
-    cout << "-------------------" << endl;
-
-    k1.updateMyInt(15);
-
-    k1.print();
-    k2.print();
-    k3.print();
-    k4.print();
-    k5.print();
-    cout << "-------------------" << endl;
-
-    k4.updateMyInt(-200);
-
-    k1.print();
-    k2.print();
-    k3.print();
-    k4.print();
-    k5.print();
-
-    return 0;
-}
-```
-
-Aby zaprezentować ostatnią własność, należy zmienić modyfikator dostępu dla naszej zmiennej statycznej.
-
+Przykład:
 
 ```cpp
-class Foo {
-public:
-    static int myInt;
-
-    void print() {
-        cout << myInt << endl;
-    }
-
-    void updateMyInt(int n) {
-        myInt += n;
-    }
-};
-
-int Foo::myInt = 100;
-
 int main() {
-    cout << Foo::myInt << endl;
-
-    Foo::myInt = 200;
-
-    cout << Foo::myInt << endl;
-
-    Foo k1;
-    k1.updateMyInt(-200);
-
-    cout << Foo::myInt << endl;
-
+    int a = 5;
+    float b = 8;
+    cout << (a + b) << endl;
     return 0;
 }
 ```
 
 {{< space 3 >}}
 
-### Metody statyczne
+### Jawna konwersja typów
 
-Metody statyczne zyskują ostatnią z własności opisanych w poprzedniej części, czyli nie musimy tworzyć obiektu, aby móc z nich korzystać. Oczywiści są tutaj obostrzenia, nie możemy w takiej metodzie korzystać z pól niestatycznych.
+Jawna konwersja typów, to jest taka, gdzie mówimy kompilatorowi "Hej chcę to skompilować na taki typ". Ogromnym jej plusem jest uwidocznienie takiego zabiegu i powinniśmy dążyć do tego, aby minimalizować niejawną konwersję typów. Jako ciekawostka dodam, że Rust nie posiada niejawnej konwersji typów.
+
+Wyróżniamy 4 rodzaje konwersji typów:
+
+* `static_cast` - rzutowanie typów prostych, które nie są ani wskaźnikami, ani referencją
+* `dynamic_cast` - rzutowanie wskaźników i klas na ich pochodne, można dokonywać tego w górę i w dół
+* `const_cast` - rzutowanie stałych na zmienne, zmiennych na stałe lub stałych jednego typu na inny typ
+* `reinterpret_cast` - rzutowanie umożliwiające zmianę dowolnego wskaźnika jednego typu na wskaźnik innego typu (bez konwersji danych)
+
+Składnia rzutowania:
 
 ```cpp
-class TestClass{
-public:
-    static void printHelloWorld() {
-        cout << "Hello world!" << endl;
-    }   
+typ_rzutowania<typ_docelowy>(element rzutowany);
+```
+
+Poniżej przykład prostego rzutowania typów prostych:
+
+```cpp
+int main()  
+{  
+    float f2 = 6.7;  
+    int x = static_cast<int>(f2);  
+    cout << "The value of x is: " << x;  
+    return 0;  
+} 
+```
+
+Rzutowanie obiektów:
+
+```cpp
+
+class Stream {
+
 };
 
+class FileStream: public Stream {
+
+};
+
+class ConsoleStream: public Stream {
+
+};
+
+class Logger {
+    Stream *stream;
+
+public:
+    Logger(Stream *stream);
+    Stream *getStream();
+}
+
 int main() {
-    TestClass::printHelloWorld();
+    Logger mainLogger = Logger(new ConsoleStream);
+
+    // do sth
+
+    auto cStream = dynamic_cast<ConsoleStream *>(mainLogger.getStream());
+    return 0;
+}
+
+```
+
+{{< space 3 >}}
+
+### Reinterpret cast
+
+Jest to bardzo specyficzne rzutowanie, które omówię osobno, ponieważ jest całkowicie odmienne od pozostałych. Do tej poty każde rzutowanie pozostawiało nam taką samą wartość, a zmieniało typ (przykładowo int o wartości 31 staje się floatem o wartości 31.0). Czyli, jeżeli byśmy sobie popatrzyli dokładniej, to zmieniał się zapis binarny, ale nie była dokonywana żadna zmiana wartości.
+
+Reinterpret cast działa tutaj troszkę odmiennie. W żaden sposób nie modyfikuje wartości (zapisu binarnego) w pamięci, zmienia jedynie sposób jej interpretowania. Dlatego też jako argument szablonu podajemy wskaźniki.
+
+Zobaczmy sobie to na poniższym przykładzie. 
+
+*Do wypisania binarnie użyjemy bitset.*
+
+```cpp
+#include <bitset>
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int a = 100;
+    char *p1 = reinterpret_cast <char*>(&a);
+
+    cout << a << "\t" << bitset<10>(a) << endl;
+    cout << *p1 << "\t" << bitset<10>(*p1) << endl;
+
     return 0;
 }
 ```
+
+Po uruchomieniu tego programu możemy zauważyć, że Na początku wypisze się nam wartość 100, a w drugim przypadku litera `d`, która odpowiada wartości 100 w tablicy asci. Zapis binarny obydwóch wartości jest taki sam.
+
+Jak to zadziałało? Została dokonana konwersja wskaźnika, zamiast inetrpretować `int`, teraz zaczęliśmy go uznawać, jako `char`. Czyli nie zmieniamy postaci danych, tylko i wyłącznie zmieniamy sposób ich interpretowania.
+
+Pamiętając (albo sprawdzając [dokumentację](https://en.cppreference.com/w/cpp/language/types)) wiemy, że `int` ma 16/32 bity, a `char` 8, co oznacza, że w jednym `int` zmieścimy 4 `char`. Używając przesunięcia bitowego dodajmy do zmiennej int znak z tabeli ASCI o numerze 103, a następnie wypiszmy te dane.
+
+{{< space 2 >}}
+
+Tutaj mamy inny przykład. niestety nie jest łatwo wypisać `float` binarnie (bez używania reinterpret_cast). Dokonujemy tutaj konwersji za pomocą `static_cast` i `reinterpret_cast` z `unsigned` do `float`, a następnie do `int`. Mogłoby się wydawać, że obydwa wyniki będą takie same, jednakże tak się nie dzieje.
+
+```cpp
+#include <bitset>
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    unsigned a = 4294967295;
+    
+    float t_s = static_cast<float>(a);
+    float t_d = *reinterpret_cast<float *>(&a);
+
+    int a_staticCast = static_cast<int>(t_s);
+    int a_reinterpretCast = *reinterpret_cast<int *>(&t_d);
+
+    cout << "Original          " << a << "\t" << bitset<16>(a) << endl;
+    cout << "Static cast:      " << a_staticCast << "\t" << bitset<16>(a_staticCast) << endl; 
+    cout << "Reinterpret cast: " << a_reinterpretCast << "\t" << bitset<16>(a_reinterpretCast) << endl; 
+    
+    return 0;
+}
+```
+
+{{< space 4 >}}
+
+### Ograniczenie konwersji typów w konstruktorze
+
+Niejawna konwersja typów może czasem stworzyć więcej problemów niż pożytku, przykładowo int potraktować, jako pointer. Aby zabezpieczyć się przed takimi zachowaniami możemy przekazywać parametry przez tego typu nawiasy `{}`, które zabronią dokonywania niejawnej konwersji typów. Jest to jednak zabezpieczenie od strony użytkownika. W przypadku konstruktorów możemy się zabezpieczyć przed stworzeniem obiektu z niewłaściwych parametrów dodając na sam początek deklaracji słowo kluczowe `explicit`. Zabroni ono dokonywania niejawnej konwersji typów.
+
+```cpp
+class Point {
+    double x;
+    double y;
+
+public:
+    explicit Point(double x, double y): x(x), y(y) {}
+};
+```
+
+[Dokumentacja](https://en.cppreference.com/w/cpp/language/explicit)
+
+
+{{< space 4 >}}
+
+
+## Szablony
+
+Pisząc różne funkcje, czy też tworząc klasę, czasem potrzebujemy, aby mogły funkcjonować na wszystkich typach danych, albo po prostu na typach, których nie znamy pisząc daną funkcjonalność. Załóżmy że chcemy stworzyć funkcję `min`. W momencie jej tworzenia nie wiemy na jakim typie danych użytkownik będzie z niej korzystał. Moglibyśmy przeciążyć ją każdym możliwym typem prostym, ale okazałoby się, że programista stworzyłby własny typ, który też można by było używać.
+
+Może podejdźmy do tematu troszkę inaczej. Czy korzystaliśmy już gdzieś, gdzie bazowa klasa potrzebowała, aby jej przekazać typ? Może jakaś funkja? Gdy popatrzymy na poprzedni temat, to przykładowo:
+
+```cpp
+int a = 100;
+float b = static_cast<float>(a);
+```
+
+Mamy rzutowanie, gdzie w nawiasach `< >` podawaliśmy typ. Jeszcze możemy przypomnieć sobie `vectory` do których przekazywaliśmy typ. Korzystaliśmy wtedy właśnie z szablonów (już gotowych).
+
+### Czym są szablony?
+
+Szablony możemy określić, jako "dodatkowa" lista parametrów, która jest wykonywana podczas kompilacji programu. W przeciwieństwie do "normalnych" parametrów, w szablonie możey przekazać typ.
+
+{{< space 5 >}}
+
+### Szablon funkcji
+
+Zacznijmy od najprostszej rzeczy, czyli szablonu funkcji. Stwórzmy prostą metodę, która będzie dodawać 2 liczby.
+
+```cpp
+template<typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+int main() {
+    cout << add(2, 5) << endl;
+    cout << add(2.7, 5.6) << endl;
+    cout << add(2, 5.6) << endl;
+}
+```
+
+
+{{< rawhtml >}}
+<script src="//onlinegdb.com/embed/js/vwIoLCrn0?theme=dark"></script>
+{{< /rawhtml >}}
+
+Tutaj pierwsza uwaga, w aktualnym przypadku i większości przypadków szablony będziemy deklarować i *implementować* w tym samym pliku i będzie to plik nagłówkowy.
+
+Spróbuj uruchomić powyższy kod. Czy wszystko się poprawnie skompilowało? Zakomentuj problematyczną linię i spróbuj znowu skompilować. Wywołując funkcję podawałeś w którymś miejscu, jaki to będzie typ? Nie, kompilator sam wydedukował to na podstawie przekazywanych parametrów. Teraz podmień problematyczną linię na tą poniżej, gdzie deklarujemy, jaki chcemy mieć typ.
+
+```cpp
+    cout << add<double>(2, 5.6) << endl;
+```
+
+Zaczęło działać? Dlaczego? Została dokonana niejawna konwersja typu i dlatego działa. Teraz pytanie, czy jesteśmy w stanie zrobić taką funkcję, aby były przyjmowane 2 różne typy bez jawnego deklarowania tego? Oczywiście, że tak, wystarczy, że przez szablon przekażemy 2 "parametry". Tak, pojawi się problem, jeden z nich będzie musiał być typem zwracanym. Który? Trzeba dokonać wyboru.
+
+```cpp
+template<typename T, typename T1>
+T add(T a, T1 b) {
+    return a + b;
+}
+```
+
+{{< space 4 >}}
+
+A jak mogę przekazać zwykłą zmienną przez taki szablon?
+
+Wystarczy, że po prostu go tam zadeklarujesz i zostanie przekazany.
+
+```cpp
+template<typename T, int x>
+T add(T a, T b) {
+    return (a + b) * x;
+}
+
+int main() {
+    cout << add<int, 6>(2, 5) << endl;
+    cout << add<double, 8>(2.7, 5.6) << endl;
+    cout << add<float, 9>(2, 5.6) << endl;
+}
+```
+
+Może się teraz pojawić pytanie, czy można tak zrobić, aby nie musieć przekazywać tej wartości `x`? Oczywiście, że tak. Tak jak mieliśmy parametry domyślne w funkcji, to tutaj też możemy przypisać domyślną wartość tych "parametrów".
+
+```cpp
+template<typename T, int x = 1>
+```
+
+{{< space 4 >}}
+
+### Przeciążanie szablonów funkcji
+
+Istnieje możliwość przeciążania szablonów, albo funkcji szablonowych. Panuje tutaj kilka zasad:
+
+- Przeciążane szablony muszą się różnić argumentami
+- Przeciążany szablon odnosi się do przeciążonej funkcji
+- Istnieje jakaś funkcja, a my tworzymy szablon, wtedy ten szablon tworzy niezadeklarowane przeciążenia funkcji
+- Specjalizacje - definiujemy dla konkretnych wartości nowe zachowanie naszej funkcji
+
+
+```c++
+template<typename T>
+T addS(T a, T b) {
+    return a + b;
+}
+
+
+template<typename T, int cons>
+T addS(T a, T b) {
+    return a + b + cons;
+}
+```
+
+{{< space 1 >}}
+
+### Szablon metod
+
+Podobnie jak w funkcjach możemy stworzyć szablon dla metod w klasie. Nie musimy wtedy tworzyć szablonu dla całej klasy, wystarczy dla jednej metody. Działa ona na dosłownie takiej samej zasadzie jak dla funkcji.
+
+{{< space 6 >}}
+
+## Szablon klasy
+
+Deklarowanie szablonu dla klasy wygląda bardzo podobnie co do funkcji, jednakże deklarujemy go dla całej klasy.
+
+```cpp
+template<typename T>
+class Variable {
+    T var;
+
+public:
+    Variable() {
+
+    }
+
+    Variable(T var): var(var) {}
+
+    T getValue() {
+        return var;
+    }
+
+    void setValue(T newVal) {
+        var = newVal;
+    } 
+}
+```
+
+Tak samo, jak dla funkcji deklaracja i implementacja musi znajdować się w tym samym pliku. (Jak się bardzo postara, to da się to rozdzielić.)
+
+{{< space 3 >}}
+
+## Ograniczanie tego przekazywanych wartości przez szablon
+
+Przed c++ 20, który wprowadza pewną nowość w tej dziedzinie był inny sposób na narzucenie ograniczeń.
+Jest to forawrd declarations, czyli deklarowanie argumentów, jakie może przyjąć szablon. Niestety robi to odrobinę zamieszania, ponieważ tutaj musimy rozdzielić deklarację od implementacji 🙄. Zobaczmy przykład.
+
+Plik nagłówkowy (.h)
+
+```cpp
+template <typename T>
+T add(T a, T b);
+```
+
+Plik źródłowy (.cpp)
+
+```cpp
+template <typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+template int add<int>(int, int);
+template double add<double>(double, double);
+```
+
+{{< space 2>}}
+
+Oczywiście istnieje jeszcze inny sposób na blokowanie "niechcianych" argumentów już na etapie kompilacji. Jest to rzucanie błędów kompilacji (`static_assert`).
 
 {{< space 7 >}}
 
-## Funkcje zaprzyjaźnione
+## Strumienie plikowe
 
-Dostęp do elementów klasy w C++ możemy realizować, tylko przez metody ewentualnie atrybuty publiczne. Jednakże może wystąpić sytuacja, gdy będziemy potrzebować, skorzystać z części prywatnej klasy w np. funkcji (poza klasą). Istnieje technika umożliwiająca nam taki dostęp. Jest nią zaprzyjaźnienie.
+Strumienie plikowe można przyrównać do strumieni `cin` i `cout`. Dzieje się tak, ponieważ wszystkie one dziedziczą z tej samej klasy bazowej:
 
-Funkcje zaprzyjaźnione mają pełny dostęp do wszystkich jej składowych (prywatnych i chronionych).
-Aby z niej skorzystać, w klasie musimy **zadeklarować** przyjaźń. Implementacja funkcji powinna znajdować się poza deklaracją klasy. Występują różnice pomiędzy implementacją funkcji w klasie, a poza nią.
+![Diagram klas](imgJipp/IO_library.png)
+*[cppreference](https://en.cppreference.com/w/cpp/io)*
+
+Strumienie plikowe:
+
+![Diagram klas](imgJipp/fstream.png)
+*[cppreference](https://en.cppreference.com/w/cpp/io/basic_fstream)*
+
+Teraz można się prosto domyślić, że obsługa plików wygląda bardzo podobnie, jak strumienie `cin` i `cout`. Prześledźmy kilka najważniejszych metod tych strumieni.
+
+### Załączanie bibliotek
+
+Aby móc korzystać ze strumieni plikowych musimy załączyć bibliotekę `fstream`.
+
+{{< space 5 >}}
+
+### Inicjalizacja strumienia
+
+Strumień możemy zainicjalizować na kilka sposobów. Pierwszym z nich jest wywołanie konstruktora z parametrami:
+
+* nazwa pliku lub ścieżka do niego
+* właściwości strumienia (opcjonalne):
+    * `app` - dodawanie do końca pliku
+    * `binary` - otwieranie pliku w trybie binarnym
+    * `in` - otwieranie pliku do czytania pliku
+    * `out` - otwieranie pliku do zapisu
+    * `trunc` - usuń zawartość strumienia zaraz po otwarciu
+    * `ate` - otwórz strumień i ustaw wewnętrzny wskaźnik na końcu
 
 ```cpp
-class Point {
-    double x;
-    double y;
+    ifstream input = ifstream("nazwa pliku.txt");
+```
 
-public:
-    Point() : 
-    x(0), y(0) {}
+```cpp
+    ifstream input = ifstream("nazwa pliku.txt", ios::binary | ios::in);
+```
 
-    Point(double x, double y):
-    x(x), y(y) {}
+Do otwarcia pliku można też użyć metody `open`
 
-    void print() {
-        cout << x << " " << y << endl;
-    }
+```cpp
+    ifstream input;
+    input.open("nazwa pliku.txt", ios::binary | ios::in);
+```
 
-    friend Point getMiddlePoint(const Point &first, const Point &second);
-};
+{{< space 5 >}}
 
-Point getMiddlePoint(const Point &first, const Point &second) {
-    return {(first.x + second.x) / 2, (first.y + second.y) / 2};
+### Sprawdzanie poprawności
+
+Po otwarciu strumienia plikowego należy sprawdzić, czy na pewno się on otworzył. Najlepiej użyć do tego metody `is_open`. 
+
+* `good()` - (basic_ios) sprawdza, czy nie wystąpiły jakieś błędy
+* `is_open()` - sprawdza, czy strumień ma przypisany plik
+* `bad()` - (basic_ios) sprawdza, czy wystąpił nieodwracalny błąd
+* `fail()` - (basic_ios) sprawdza, czy nie wystąpiły jakieś błędy
+
+{{< space 5 >}}
+
+### Obsługa strumieni
+
+Obsługa strumieni wygląda tak samo, jak `cin` i `cout`, tylko tyle, że zamiast tych nazw używamy obiektu przechowującego nasz strumień.
+
+```cpp
+ifstream in = ifstream("hello.txt");
+
+if(in.is_open()) {
+    string temp;
+    in >> temp;
+    cout << temp;
 }
 ```
 
 {{< space 5 >}}
 
-### Przeciążanie operatorów
+### Zamykanie strumieni
 
-[Dokumentacja](https://en.cppreference.com/w/cpp/language/operators)
+Każdy strumień należy zamknąć po zakończeniu jego używania, ponieważ może to blokować dostęp do pliku. Co więcej, jeżeli go zamkniemy, to mamy pewność, że dane zostały do niego zrzucone i w razie nagłej awarii naszego programu nie zostaną one utracone. Strumienie zamykamy za pomocą metody `close()`. Możemy też ręcznie wywołać zrzucenie strumienia do pliku, służy do tego metoda `flush()`.
 
-[WikiBooks](https://pl.wikibooks.org/wiki/C%2B%2B/Przeciążanie_operatorów)
+```cpp
+int main() {
+    ofstream stream{"outputlog.txt"};
 
-[c++0x](https://cpp0x.pl/artykuly/Inne-artykuly/Przeciazanie-operatorow-w-C++/15)
+    for (int i = 0; i < 10; ++i) {
+        stream << i << endl;
+    }
 
-[c++0x cz2](https://cpp0x.pl/kursy/Programowanie-obiektowe-C++/Podstawy/Operatory/498)
+    stream.flush();
 
-[Dokumentacja MS](https://docs.microsoft.com/pl-pl/cpp/cpp/operator-overloading?view=msvc-160)
+    cout << "Czy plik się zapisał?" << endl;
+    string answear;
+    cin >> answear;
 
-Sam język dostarcza nam już wiele prostych typów danych. Co, jeżeli chcemy utworzyć złożony typ danych np. dla liczby zespolonej. Jak pamiętamy, składa się on z części zespolonej i rzeczywistej. Możemy na nim też wykonywać podstawowe operacje, takie jak dodawanie, odejmowanie itp. Moglibyśmy do tego definiować metody i je wywoływać, jednakże byłoby to bardzo nie wygodne, a przede wszystkim nieprzejrzyste.
+    stream << "done";
+    stream.close();
 
-Rozwiązaniem naszego problemu jest przeciążenie operatorów, czyli definiowanie dla nich zachowania. Mamy możliwość
- przeciążenie/przeładowanie następujących operatorów:
-`+` `-` `*` `/` `%` `^` `&` `|` `~` `!` `=` `<` `>` `+=` `-=` `*=` `/=` `%=` `^=` `&=` `|=` `<<` `>>` `>>=` `<<=` `==` `!=` `<=` `>=` `<=>` (since C++20) `&&` `||` `++` `--` `,` `->*` `->` `( )` `[ ]` `new` `new[]` `delete` `delete[]`
+    return 0;
+}
 
-Należy jednak wiedzieć, że nie wszystkie operatory możemy w dowolny sposób przeciążać. Szczegóły możesz poznać w dokumentacji (szczególnie zwróć uwagę na `->`).
-Operatory `=`, `()`, `[]`, `->` muszą zostać przeciążone przez metodę klasy, nie mogą przez funkcję!
-
-{{< space 3 >}}
-
-Ogólny przepis na stworzenie implementacji dla przeładowania/przeciążenia operatorów w metodzie wygląda następująco:
-
-`zwracanyTyp operator@(typPrawegoOperandu &nazwaPrawegoOperandu);`
-
-Gdzie `@`, to operator, który chcemy przeciążyć.
+```
 
 {{< space 5 >}}
 
-Teraz przeanalizujmy kilka przykładów. Co będą robić operatory w danych przypadkach?
+### Czytanie pliku
+
+Plik możemy czytać słowo po słowie, a dokładniej od białego znaku do białego znaku, sprawdzając, czy nie dotarliśmy do końca pliku (metoda `eof()`). W takim przypadku będziemy korzystać ze strumienia plikowego, tak jak z `cin`.
 
 ```cpp
-class Point {
-    double x;
-    double y;
-
-public:
-    Point() : 
-    x(0), y(0) {}
-
-    Point(double x, double y):
-    x(x), y(y) {}
-
-    void print() {
-        cout << x << " " << y << endl;
-    }
-
-    bool operator==(const Point &rhs) {
-        return x == rhs.x && y == rhs.y;
-    }
-};
-
 int main() {
-    Point p1;
-    Point p2{5, 5};
-    Point p3;
+    ifstream stream{"input.txt"};
 
-    cout << (p1 == p2) << endl;
-    cout << (p1 == p3) << endl;
+    if(stream.good()) {
+        string temp;
+        while(!stream.eof()) {
+            temp >> temp;
+            cout << temp;
+        }
+        stream.close();
+    }
+
     return 0;
 }
 ```
 
-W pierwszym przypadku zaimplementowaliśmy operator porównania. Zapewne zastanawiasz się, dlaczego jako argument została zdefiniowana nazwa `rhs`. Rozwijając ten skrót `right hand side`, czyli to, co stoi po prawej stronie od znaku, który przeciążamy. Jeżeli implementujemy przeciążenie operatora jako metodę, to zawsze po lewej stronie będzie nasza klasa. 
+Możemy też czytać strumień linijka po linijce, należy do tego użyć funkcji `getline`. Jeżeli nie widzi `getline` należy załączyć bibliotekę `string`.
 
-Rozwińmy naszą klasę bardziej i zaimplementujmy jeszcze operator `[]`, którego będziemy używać do wypisywania x i y, w zależności, co wpiszemy w środku.
 
 ```cpp
-double operator[](char idx) {
-    if (idx == 'x')
-        return x;
-    else if (idx == 'y')
-        return y;
-    else
-        return 0;  //beter throw error
+int main() {
+    ifstream stream{"input.txt"};
+
+    if(stream.good()) {
+        string temp;
+        while(!stream.eof()) {
+            getline(stream, temp);
+            cout << temp << endl;
+        }
+        stream.close();
+    }
+
+    return 0;
 }
 ```
 
-Rozważmy jeszcze jeden przykład, tym razem z przypisaniem. Niech to będzie operator `+=`, który będzie przesuwał nasz punkt o przekazaną wartość.
+{{< space 5 >}}
+
+### Binarne zapisywanie i czytanie plików
+
+Dotychczas czytaliśmy pliki z wartości zapisanych jawnym tekstem. Jednakże możemy zrzucić zawartość naszych zmiennych bezpośrednio do pliku (bez przeprowadzania konwersji do tekstu). Będzie to zapis binarny i musimy do tego użyć `reinterpret_cast` oraz metody `write`, której mówimy ile znaków chcemy zapisać.
 
 ```cpp
-Point &operator+=(double rhs) {
-    x += rhs;
-    y += rhs;
-    return *this;
+int main() {
+    ofstream stream{"hello.txt"};
+    ofstream streamBin{"helloBin.txt", ios::binary};
+    int k = 136;
+    stream << k;
+
+    streamBin.write(reinterpret_cast<char*>(&k), sizeof(k));
+
+    stream.close();
+    streamBin.close();
 }
 ```
 
-Można zauważyć, że zwracamy referencję do aktualnego obiektu. Przy przeciążeniu tego typu operatorów zazwyczaj się to robi, aby móc później wykorzystać tę wartość. Oczywiście moglibyśmy zrobić ten operator typu `void`, ale wtedy nie bylibyśmy w stanie zrobić czegoś w tym stylu:
+Porównaj zawartość plików, czy jest taka sama? Dlaczego?
+
+{{< space 5 >}}
+
+Zapisaliśmy wartości do pliku, teraz spróbujmy je odczytać. Aby to zrobić, musimy dokonać operacji odwrotnej i musimy z góry wiedzieć, w jakiej kolejności są wartości.
 
 ```cpp
-Point p2;
-Point p3 = p2 += 5;
+int main() {
+    ifstream stream{"hello.txt"};
+    ifstream streamBin{"helloBin.txt", ios::binary};
+
+    if (stream.good() && streamBin.good()) {
+        int k = 0;
+        stream >> k;
+
+        cout << k << endl;
+
+        streamBin.read(reinterpret_cast<char*>(&k), sizeof(k));
+        cout << k << endl;
+    }
+    return 0;
+}
 ```
 
-Można tutaj tworzyć wiele przykładów, ale teraz przejdźmy dalej i wykorzystajmy obydwie poznane dziś nowości. Przeciążmy operator przesunięcia bitowego `<<`. Tak ten magiczny operator wykorzystywany przez `cout` jest operatorem przesunięcia bitowego i właśnie zaimplementujemy go w sposób taki, aby nasza klasa działała z `cout`. Pierwszym problemem, który się pojawia, jest to, że po lewej stronie znaku nie występuje nasza klasa, tylko `std::ostream`. Aby rozwiązać ten problem, wykorzystamy funkcję zaprzyjaźnioną, dzięki temu możemy zadeklarować, co stoi po lewej stronie znaku i po prawej. Jak się zapewne domyślasz, jak było `rhs`, to teraz będzie `lhs`. Warto używać tych nazw, ponieważ mówią one dokładnie, z której strony znaku czerpiemy wartość.
+{{< space 5 >}}
+
+### Binarny zapis i odczyt obiektu
+
+Przeanalizuj poniższy przykład, sprawdź, czy działa poprawnie.
 
 ```cpp
-class Point {
+class Obj {
     double x;
     double y;
+    double z;
+    int *tab;
 
 public:
-    Point() : 
-    x(0), y(0) {}
+    Obj(double x, double y, double z): x(x), y(y), z(z) {
+        tab = new int[3];
+        tab[0] = x;
+        tab[1] = y;
+        tab[2] = z;
+    }
 
-    Point(double x, double y):
-    x(x), y(y) {}
+    ~Obj() {
+        delete [] tab;
+    }
 
     void print() {
-        cout << x << " " << y << endl;
+        cout << "x: " << x << endl; 
+        cout << "y: " << y << endl; 
+        cout << "z: " << z << endl; 
+        cout << "tab[0]: " << tab[0] << endl; 
+        cout << "tab[1]: " << tab[1] << endl; 
+        cout << "tab[2]: " << tab[2] << endl; 
     }
 
-    bool operator==(const Point &rhs) {
-        return x == rhs.x && y == rhs.y;
-    }
-
-    friend ostream &operator<<(ostream &lhs, const Point &rhs);
 };
 
-ostream &operator<<(ostream &lhs, const Point &rhs) {
-    return lhs << rhs.x << " " << rhs.y;
+void save() {
+    Obj obj{5, 8, 3.14};
+    obj.print();
+
+    ofstream str{"file.bin", ios::binary};
+    if (str.good()) {
+        str.write(reinterpret_cast<char*>(&obj), sizeof(obj));
+        str.close();
+    }
+}
+
+void read() {
+    Obj obj{0, 0, 0};
+    obj.print();
+
+    ifstream str{"file.bin", ios::binary};
+    if (str.good()) {
+        str.read(reinterpret_cast<char*>(&obj), sizeof(obj));
+        str.close();
+    }
+    obj.print();
 }
 
 int main() {
-    Point p1;
-    Point p2{5, 5};
-
-    cout << p1 << endl;
-    cout << p2 << endl;
-    return 0;
+    save();
+    read();
+    
 }
-
 ```
 
+Wiesz, dlaczego on działa w taki sposób? Zastanów się, jakie typy zapisałeś do pliku.
+
+Postaraj się to naprawić.
+
+{{< space 2 >}}
+
+### Binarny zapis i odczyt stringów
+
+```cpp
+int main() {
+    {
+        ofstream out("file.bin", ios::binary | ios::out);
+
+        string str("Hello world!");
+
+        if (out.is_open()) {
+            int size = str.size();
+            out.write(reinterpret_cast<char*>(&size), sizeof(int));
+
+            out.write(str.data(), size);
+        }
+    }
+
+    // Rozwiązanie prostsze
+    {
+        ifstream out("file.bin", ios::binary | ios::in);
+
+        string str;
+
+        if (out.is_open()) {
+            int size = str.size();
+            out.read(reinterpret_cast<char*>(&size), sizeof(int));
+
+            char buff[512];
+            out.read(buff, size);
+            str = string(buff, size);
+            cout << str << endl;
+        }
+    }
+
+    // Rozwiązanie sprytniejsze
+    {
+        ifstream out("file.bin", ios::binary | ios::in);
+
+        string str;
+
+        if (out.is_open()) {
+            int size = str.size();
+            out.read(reinterpret_cast<char*>(&size), sizeof(int));
+
+            str.resize(size);
+            out.read(str.data(), size);
+            cout << str << endl;
+        }
+    }
+    return 0;
+}
+```
+
+{{< space 2 >}}
+
+### Czy wystarczy dodać flagę bin, aby zapisywać binarnie?
+
+Flaga `bin` podczas otwierania pliku informuje strumień, że będzie binarny. Nie wpływa to na odczytywanie wartości. Zmienia to spoósb interpretacji i wyamgań co do (mówiąc w dużym skrócie) znaków końca linii. Więcej szczegółów w [dokumentacji](https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes).
+
+Parafrazując, jeżeli użyjemy takiej samej składni do zapisu liczby do pliku, to niezależnie, czy był to strumień binarny, czy nie, zapisze się tak samo.
 
 
+{{< space 5 >}}
+
+### Co z kodowaniem plików?
+
+Niestey nie ma na to prostej odpowiedzi i prostego rozwiązania. W przypadku linuxa, domyślnie kodowanie plików to UTF-8 (także konsoli), więc wszystko działa poprawnie. W przypadku windowsa, a dokładniej Visual Studio, jest o wiele trudniej i zagadka jest o wiele większa. Teoretycznie będzie on forsować "swoje" kodowanie.
+
+Nie ma bezpośredniej prostej funkcji, aby to sprawdzić i ustawić kodowanie pliku.
