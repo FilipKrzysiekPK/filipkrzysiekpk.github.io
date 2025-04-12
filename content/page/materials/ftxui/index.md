@@ -3,8 +3,8 @@ title: FTXUI - wprowadzenie
 layout: singleNoHeader
 date: 2024-03-10
 toc: true
-lastmod: 2025-04-11T22:28:59.253Z
-draft: true
+lastmod: 2025-04-12T12:42:21.109Z
+draft: false
 ---
 
 # FTXUI - wprowadzenie
