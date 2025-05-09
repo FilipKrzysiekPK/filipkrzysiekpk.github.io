@@ -1,11 +1,11 @@
 ---
-title: Języki i Paradygmaty Programowania II laboratorium 3
+title: Języki i Paradygmaty Programowania II laboratorium 4
 layout: singleNoHeader
 date: 2023-11-03
-lastmod: 2025-04-05T19:05:16.195Z
+lastmod: 2025-05-09T18:40:38.161Z
 ---
 
-# Laboratorium 3
+# Laboratorium 4
 
 ### Cele laboratorium i poruszane zagadnienia
 
@@ -28,14 +28,16 @@ Większość bugów można wyśledzić za pomocą odpowiedniego debugowania wyko
 
 Wykryj błąd w poniższej aplikacji:
 
-TODO add code to debug
 
 {{< space 4 >}}
 
 ## Stałe metody
 
 Do tej pory wszystkie metody, jakie tworzyliśmy oznaczaliśmy co najwyżej słowem kluczowym `override`, albo `virtual`. Teraz dodamy kolejne słowo kluczowe, które już wszyscy doskonale znamy, `const`.
-Po co oznaczać metodę, jako `const`? Dajemy w ten sposób informację kompilatorowi, że nie będziemy modyfikować żadnych pól/atrybutów klasy. Oczywiście kompilator nam nie ufa i nas sprawdzi. Jednakże kluczową funkcjonalnością w tym przypadku jest, gdy będziemy chcieli użyć stałego obiektu naszej klasy. Jeżeli jest ona stała, to nie możemy modyfikować w żaden sposób jej zawartości. Gdy nie oznaczymy metody jako `const`, to skąd obiekt ma wiedzieć, że nie modyfikujemy zawartości klasy? Właśnie po to się to robi 😊.
+
+**Po co oznaczać metodę, jako `const`?**
+
+Dajemy w ten sposób informację kompilatorowi, że nie będziemy modyfikować żadnych pól/atrybutów klasy. Oczywiście kompilator nam nie ufa i nas sprawdzi. Jednakże kluczową funkcjonalnością w tym przypadku jest, gdy będziemy chcieli użyć stałego obiektu naszej klasy. Jeżeli jest ona stała, to nie możemy modyfikować w żaden sposób jej zawartości. Gdy nie oznaczymy metody jako `const`, to skąd obiekt ma wiedzieć, że nie modyfikujemy zawartości klasy? Właśnie po to się to robi 😊.
 
 ```cpp
 // .h/.hpp file
@@ -50,51 +52,29 @@ Example::unnecessary() const {
 }
 ```
 
+Przeanalizuj [przykładowy kod](https://wandbox.org/permlink/aZRIolgblhKtE6oz).
+
+Działa on poprawnie. Ulepsz go zmieniając przekazanie parametru do funkcji `display` za pomocą stałej referencji. Czy kod dalej się kompiluje? Napraw go.
+
 {{< space 5 >}}
 
 ## Inline functions
 
-Do zrozumienia problematyki posłużymy się [aplikacją zamieniającą kod na assembler](https://godbolt.org/).
-
-Wklej następujący kod i przeanalizuj, czy są jakieś różnice pomiędzy metodą `inline`, a zwykłą.
-
 ```cpp
-class Point
-{
-public:
-    // Define "accessor" functions as
-    //  reference types.
-    unsigned& x();
-    unsigned& y();
-private:
-    unsigned _x;
-    unsigned _y;
-};
-
-inline unsigned& Point::x()
-{
-    return _x;
-}
-unsigned& Point::y()
-{
-    return _y;
-}
-int main()
-{
-    Point p1;
-    p1.x();
-    p1.y();
-    return 0;
+inline int add(int a, int b) {
+    return a + b;
 }
 ```
 
-Można zauważyć, że w metodzie `y()` jest wykonywana dodatkowa operacja. Może to nie przedstawiać całości działania tej funkcjonalności, ponieważ następuje tutaj kompilacja w trybie debugowania, a nie z włączonymi optymalizacjami.
+Funkcje `inline functions` powinny działać troszkę szybciej od zwykłych, ponieważ ich zawartość powinna zostać wklejona w miejsce ich wywołania. Oczywiście nie jest aż tak kolorowo, ponieważ to kompilator zdecyduje, jak to będzie działać. Funkcje `inline` powinny być stosunkowo małe. Będą one użyteczne to stosować w przypadku, gdy walczymy o bardzo mocne zoptymalizowanie naszej aplikacji i liczy się każda operacja na procesorze.
 
-Bardziej teoretycznie patrząc na temat, `inline functions` powinny działać troszkę szybciej od zwykłych, ponieważ ich zawartość powinna zostać wklejona w miejsce ich wywołania. Oczywiście nie jest aż tak kolorowo, ponieważ to kompilator zdecyduje, jak to będzie działać. Funkcje `inline` powinny być stosunkowo małe. Będziemy to stosować w przypadku, gdy walczymy o bardzo mocne zoptymalizowanie naszej aplikacji i liczy się każda operacja.
-
-Uwaga, funkcje inline muszą zostać zaimplementowane w pliku nagłówkowym.
+**Uwaga**, funkcje inline muszą zostać zaimplementowane w pliku nagłówkowym. 
 
 [Przykładowe omówienie tematu](https://pl.wikibooks.org/wiki/C%2B%2B/Funkcje_inline)
+
+[Omówienie większej ilości przypadków](https://cpp0x.pl/dokumentacja/standard-C/inline/9)
+
+[Dokumentacja](https://en.cppreference.com/w/cpp/language/inline)
 
 {{< space 5 >}}
 
@@ -104,7 +84,7 @@ Zmiennych statycznych nie da się uniwersalnie opisać, należy popatrzeć, gdzi
 
 ### Zmienne statyczne w funkcjach
 
-Tym razem przed opisaniem zagadnienia uruchom poniższy program i sprawdź, jak działa.
+Uruchom poniższy program i sprawdź, jak on działa.
 
 ```cpp
 int counter() {
@@ -124,6 +104,8 @@ int main() {
 }
 ```
 
+[Wandbox](https://wandbox.org/permlink/ipWE48x7XFcHBuC6)
+
 Jak możemy zauważyć każde kolejne wywołanie funkcji `counter` zwiększało wartość `i` o 1. Zmienna ta nie była usuwana przy wychodzeniu z funkcji.
 
 Właśnie na tym polegają zmienne statyczne. Jest ona tworzona jeden raz i usuwana, dopiero wraz z końcem działania programu. Jej działanie można przyrównać do zmiennej globalnej, lecz dostęp do niej jest tylko i wyłącznie z funkcji, w której została stworzona i **zainicjowana**.
@@ -132,7 +114,7 @@ Właśnie na tym polegają zmienne statyczne. Jest ona tworzona jeden raz i usuw
 
 ### Zmienne statyczne w klasach
 
-Jak się zapewne możemy domyślić, zmienne statyczne w klasach będą działać podobnie, jednakże trzeba tu kilka rzeczy dopowiedzieć. Po pierwsze zmienna statyczna jest współdzielona pomiędzy obiektami. Jeżeli stworzymy 10 obiektów naszej klasy, to wszystkie będą miały taką samą wartość zmiennej statycznej, po zmodyfikowaniu jej w jednej klasie, zmodyfikuje się we wszystkich. Po drugie zmienną statyczną należy zainicjalizować poza klasą. Po trzecie Możemy korzystać ze zmiennej statycznej klasy bez tworzenia obiektu klasy. Zobaczmy przykład dla dwóch pierszych przypadków.
+Jak się zapewne możemy domyślić, zmienne statyczne w klasach będą działać podobnie, jednakże trzeba tu kilka rzeczy dopowiedzieć. Po pierwsze zmienna statyczna jest współdzielona pomiędzy obiektami. Jeżeli stworzymy 10 obiektów naszej klasy, to wszystkie będą miały taką samą wartość zmiennej statycznej, po zmodyfikowaniu jej w jednej klasie, zmodyfikuje się we wszystkich. Po drugie zmienną statyczną należy zainicjalizować poza klasą w pliku cpp. Po trzecie Możemy korzystać ze zmiennej statycznej klasy bez tworzenia obiektu klasy (oczywiście jeżeli jest ona w części publicznej). Zobaczmy przykład dla dwóch pierwszych przypadków.
 
 ```cpp
 class Foo {
@@ -220,11 +202,19 @@ int main() {
 }
 ```
 
+#### inline static od c++17
+
+Od c++17 nie trzeba osobno inicjalizować zmiennej statycznej jeżeli poprzedzi się ją słowem kluczowym `inline`.
+
+```cpp
+    inline static int myInt = 0;
+```
+
 {{< space 3 >}}
 
 ### Metody statyczne
 
-Metody statyczne zyskują ostatnią z własności opisanych w poprzedniej części, czyli nie musimy tworzyć obiektu, aby móc z nich korzystać. Oczywiści są tutaj obostrzenia, nie możemy w takiej metodzie korzystać z pól niestatycznych.
+Metody statyczne zyskują ostatnią z własności opisanych w poprzedniej części, czyli nie musimy tworzyć obiektu, aby móc z nich korzystać. Oczywiście są tutaj obostrzenia, nie możemy w takiej metodzie korzystać z pól niestatycznych.
 
 ```cpp
 class TestClass{

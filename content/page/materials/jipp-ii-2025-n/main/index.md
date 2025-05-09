@@ -3,7 +3,7 @@ title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
 toc: false
-lastmod: 2025-04-05T19:05:34.119Z
+lastmod: 2025-05-09T18:04:03.693Z
 ---
 
 # Języki i Paradygmaty Programowania II
@@ -31,8 +31,8 @@ lastmod: 2025-04-05T19:05:34.119Z
 | :-: | :--: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------: |
 |  1  |      | Zajęcia organizacyjne, różnice pomiędzy c i c++, stringi, alokacja pamięci, obiektowość i klasy, konstruktory, destruktory, gettery oraz settery, RAII | [📄🔗](/page/materials/jipp-ii-2025-n/z1) |
 |  2  |      |           Konstruktor kopiujący, przekazywanie elementów do funkcji, dziedziczenie, polimorfizm, usuwanie i używanie domyślnego konstruktora           | [📄🔗](/page/materials/jipp-ii-2025-n/z2) |
-|  3  |      |                                                       Szablony, obsługa plików, konwersja typów                                                        | [📄🔗](/page/materials/jipp-ii-2025-n/z3) |
-|  4  |      |                      Debugowanie, Stałe metody, explicit, funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static                      |                 [📄🔗](#)                 |
+|  3  |      |                                                  Szablony, obsługa plików, konwersja typów, explicit                                                   | [📄🔗](/page/materials/jipp-ii-2025-n/z3) |
+|  4  |      |                           Debugowanie, Stałe metody, funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static                           | [📄🔗](/page/materials/jipp-ii-2025-n/z4) |
 |  5  |      |                                                 Biblioteka STL, obsługa błędów, wyjątki, lambdy, RTTI                                                  |                 [📄🔗](#)                 |
 |  6  |      |                                    Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu                                     |                 [📄🔗](#)                 |
 
