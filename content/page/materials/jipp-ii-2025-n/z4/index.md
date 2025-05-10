@@ -2,7 +2,7 @@
 title: Języki i Paradygmaty Programowania II laboratorium 4
 layout: singleNoHeader
 date: 2023-11-03
-lastmod: 2025-05-09T18:40:38.161Z
+lastmod: 2025-05-10T05:41:25.721Z
 ---
 
 # Laboratorium 4
@@ -26,7 +26,7 @@ Podstawowym sposobem debugowania jest dodawania brakepointów, czyli takich punk
 
 Większość bugów można wyśledzić za pomocą odpowiedniego debugowania wykorzystując powyższe metody, czyli brakepointy i śledzenie linia po linii wykonywanego kodu.
 
-Wykryj błąd w poniższej aplikacji:
+Wykryj błąd w aplikacji dostępnej na delcie.
 
 
 {{< space 4 >}}
