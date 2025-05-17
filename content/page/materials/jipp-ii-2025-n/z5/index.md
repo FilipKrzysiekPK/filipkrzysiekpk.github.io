@@ -2,7 +2,7 @@
 title: Języki i Paradygmaty Programowania II laboratorium 5
 layout: singleNoHeader
 date: 2024-05-11T08:38:12.637Z
-lastmod: 2024-05-11T11:09:31.677Z
+lastmod: 2025-05-17T17:48:45.619Z
 ---
 
 # Laboratorium 5
@@ -458,7 +458,7 @@ Dopisz wywołanie funkcji `funMin`, które będzie przekazywać lambdę jako pie
 
 Run Time Type Information pozwala nam na uzyskanie informacji o typie w czasie działania programu.
 
-Więcejj informacji można uzyskać na blogu [cpp polska](https://cpp-polska.pl/post/dynamic-cast-oraz-type-id-jako-narzedzia-rtti).
+Więcej informacji można uzyskać na blogu [cpp polska](https://cpp-polska.pl/post/dynamic-cast-oraz-type-id-jako-narzedzia-rtti).
 
 {{< space 7 >}}
 

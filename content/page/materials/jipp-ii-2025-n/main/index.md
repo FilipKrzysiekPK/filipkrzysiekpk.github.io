@@ -3,7 +3,7 @@ title: Języki i Paradygmaty Programowania II
 layout: singleNoHeader
 date: 2024-03-10
 toc: false
-lastmod: 2025-05-09T18:04:03.693Z
+lastmod: 2025-05-17T17:45:56.828Z
 ---
 
 # Języki i Paradygmaty Programowania II
@@ -33,7 +33,7 @@ lastmod: 2025-05-09T18:04:03.693Z
 |  2  |      |           Konstruktor kopiujący, przekazywanie elementów do funkcji, dziedziczenie, polimorfizm, usuwanie i używanie domyślnego konstruktora           | [📄🔗](/page/materials/jipp-ii-2025-n/z2) |
 |  3  |      |                                                  Szablony, obsługa plików, konwersja typów, explicit                                                   | [📄🔗](/page/materials/jipp-ii-2025-n/z3) |
 |  4  |      |                           Debugowanie, Stałe metody, funkcje inline, przeciążenia operatorów, funkcje zaprzyjaźnione, static                           | [📄🔗](/page/materials/jipp-ii-2025-n/z4) |
-|  5  |      |                                                 Biblioteka STL, obsługa błędów, wyjątki, lambdy, RTTI                                                  |                 [📄🔗](#)                 |
+|  5  |      |                                                 Biblioteka STL, obsługa błędów, wyjątki, lambdy, RTTI                                                  | [📄🔗](/page/materials/jipp-ii-2025-n/z5) |
 |  6  |      |                                    Parametry uruchomienia programu, doxygen, statyczna analiza kodu, czystość kodu                                     |                 [📄🔗](#)                 |
 
 
