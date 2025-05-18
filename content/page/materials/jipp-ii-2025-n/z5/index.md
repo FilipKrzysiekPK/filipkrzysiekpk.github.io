@@ -2,7 +2,7 @@
 title: Języki i Paradygmaty Programowania II laboratorium 5
 layout: singleNoHeader
 date: 2024-05-11T08:38:12.637Z
-lastmod: 2025-05-17T17:48:45.619Z
+lastmod: 2025-05-18T11:03:43.966Z
 ---
 
 # Laboratorium 5
@@ -125,6 +125,47 @@ Jeżeli nie zostanie znaleziony podciąg znaków, to zostanie zwrócone `string:
 {{< rawhtml >}}
 <script src="//onlinegdb.com/embed/js/rNSWhW1Ye?theme=dark"></script>
 {{< /rawhtml >}}
+
+{{< space 4 >}}
+
+### Zwracanie, czy zadanie zakończyło się powodzeniem inne podejście (od c++17)
+
+W c++17 został dodany `std::optional`. Jak sama nazwa wskazuje typ opcjonalny. Pozwala on zwrócić wartość, albo i nie. Popatrz na poniższy kawałek kodu:
+
+```cpp
+#include <optional>
+
+using namespace std;
+
+optional<int> divide(int a, int b) {
+    if (b == 0) {
+        return {}; //Zwróć pusty obiekt optional - bez wartości
+    }
+
+    return {a / b}; // Zwróć obiekt z wartością
+}
+
+int main() {
+    int a, b;
+    cout << "Podaj liczbę a:";
+    cin >> a;
+    cout << "Podaj liczbę b:";
+    cin >> b;
+
+    optional<int> res = divide(a, b);
+
+    if (res.has_value()) {
+        cout << "Wynik: " << res.value() << endl;
+    } else {
+        cout << "Nie można dzielić przez 0!" << endl;
+    }
+    return 0;
+}
+```
+
+Dzięki takiemu podejściu nie musimy tworzyć specjalnej wartości, którą musimy zapisać gdzieś w dokumentacji, a użytkownik chcący z niej skorzystać musiał znaleźć tę informację. Tutaj bezpośrednio wiemy, czy funkcja zakończyła sie powodzeniem i zwróciła wartość, czy nie.
+
+Powyżej pokazano przykładowe użycie `optional`. Można go też używać w inny sposób, np w ifie pominąć `has_value()`, ale po więcej szczegółów zapraszam do [dokumentacji](https://en.cppreference.com/w/cpp/utility/optional).
 
 {{< space 4 >}}
 
