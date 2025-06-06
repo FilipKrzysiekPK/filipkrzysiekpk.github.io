@@ -2,7 +2,7 @@
 title: Języki i Paradygmaty Programowania II laboratorium 5
 layout: singleNoHeader
 date: 2024-06-09T07:15:29.707Z
-lastmod: 2024-06-09T07:15:40.596Z
+lastmod: 2025-06-06T20:06:13.043Z
 ---
 
 # Laboratorium 6
@@ -11,12 +11,12 @@ lastmod: 2024-06-09T07:15:40.596Z
 
 * Kontenery dokładniejszy opis
 * Parametry uruchamiania programu
-* Doxygen
-Statyczna analiza kodu
+* Statyczna analiza kodu
+* biblioteka stl
 
 {{< space 7 >}}
 
-# Kontenery
+## Kontenery
 
 [Dokumentacja](https://en.cppreference.com/w/cpp/container)
 
@@ -54,121 +54,9 @@ Dodatkowo w c++23 mają zostać dodane:
 
 Jak można zauważyć istnieje wiele kontenerów, możemy dobierać odpowiednie do zapotrzebowania. Przyjrzymy się głębiej najczęściej używanemu `vector` -owi.
 
-{{< space 3 >}}
-
-### vector
-
-Jest to kontener, w którym mamy dostęp sekwencyjny do kolejnych elementów. Przechowuje on dane w pamięci, tak jak "normalna" tablica. Główną różnicą względem najprostszej tablicy jest możliwość dynamicznej zmiany swojej wielkości.
-
-Vector jest to jeden z najczęściej używanych kontenerów. Przypomina on w zachowaniu "tradycyjną" tablicę i też właśnie w takiej formie przechowuje dane w pamięci, ale w przeciwieństwie do niej pozwala na dynamiczną zmianę swojej wielkości. Omówmy podstawowe funkcjonalności:
-
-* Dostęp do elementów:
-  * `at(indx)` - dostęp do elementu ze sprawdzaniem, czy przekazany indeks jest w zakresie tablicy
-  * `operator[]` - dostęp do elementu
-  * `front` - dostęp do pierwszego elementu
-  * `back` - dostęp do ostatniego elementu
-  * `data` - bezpośredni dostęp do danych
-* Iteratory:
-  * `begin` - zwraca iterator wskazujący na poczatek
-  * `end` - zwraca iterator wskazujący na koniec 
-  * `rbegin` - zwraca wsteczny iterator wskazujący na poczatek
-  * `rend` - zwraca wsteczny iterator wskazujący na koniec
-* Zarządzanie wielkością:
-  * `empty` - informacja czy kontener jest pusty
-  * `size` - zwraca rozmiar, ile elementów przechowuje kontener
-  * `max_size` - zwraca ile maksymalnie elementów może przechowywać kontener
-  * `reserve(elems)` - rezerwacja pamięci "magazynu" dla przechowywania `elems` elementów
-  * `capacity` - zwraca ile elementów może być przechowywane w "magazynie"
-  * `shrink_to_fit` - zmniejszanie "magazynu" do aktualnie znajdującej się w nim liczby elementów
-* Modyfikatory:
-  * `clear` - usuwanie wszystkich elementów ("magazyn" pozostaje nienaruszony)
-  * `insert` (c++23) - wstawianie elementu we wskazanym miejscu (pod wskazanym indeksem)
-  * `insert_range` - wstawianie tablicy elementów we wskazanym miejscu
-  * `emplace` - wywoływanie konstruktora elementu na wskazanej pozycji
-  * `erase` - usuwanie elementu/ów pod wskazanym indeksem/zakresie
-  * `push_back` - dodawanie elementu na końcu kontenera
-  * `emplace_back` - wywoływanie konstruktora elementu na końcu kontenera
-  * `append_range` (c++23) - dodawanie wielu elementów na końcu kontenera
-  * `pop_back` - usuwanie ostatniego elementu z kontenera
-  * `resize` - zmiana wielkości kontenera (ile elementów może on przechowywać)
-  * `swap` - zamiana miejscami dwóch elementów w kontenerze
-
-Jak można zauważyć kontener posiada wiele pomocnych metod, stąd też jego tak duża popularność, w szczególności, że jest bardzo podobny do "tradycyjnej" tablicy.
-
-{{< space 2 >}}
-
-Zastanówmy się teraz nad jego działaniem. Czy `capacity` i `size` to jest to samo? Vector działa na takiej zasadzie, że wewnątrz siebie tworzy sobie tablicę, którą nazwiemy roboczo "magazynem". Nasz magazyn może mieć inny rozmiar (być taki sam, bądź większy), niż liczba elementów, które przechowujemy wewnątrz naszego kontenera. Czyli możemy mieć puste półki, jeżeli jednak zapełnimy je wszystkie, to musimy powiększyć nasz magazyn. Gdy pytamy się o wielkość kontenera, to udzielamy informacji ile półek jest zajętych, natomiast, gdy pytamy się o pojemność, to mówimy ile półek jest w całym magazynie. Przeanalizuj poniższy kawałek kodu i porównaj z wynikami.
-
-```cpp
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-void printSizeAndCapacity(const vector<int> &v) {
-    cout << "Size:  " << v.size() << "\t\tCapacity: " << v.capacity() << endl;
-}
- 
-int main()
-{
-    vector<int> v;
-    printSizeAndCapacity(v);
-
-    v.push_back(100);
-    printSizeAndCapacity(v);
-
-    v.push_back(100);
-    printSizeAndCapacity(v);
-
-    v.push_back(100);
-    printSizeAndCapacity(v);
-
-    v.reserve(100);
-    printSizeAndCapacity(v);
-
-    v.resize(50);
-    printSizeAndCapacity(v);
-
-    v.resize(150);
-    printSizeAndCapacity(v);
-
-    v.reserve(100);
-    printSizeAndCapacity(v);
-}
-```
-
-**Jakie niesie to konsekwencje?**
-
-Główną i najważniejszą konsekwencją tego jest problem z dostępem do elementów przez wskaźnik. Możemy to robić bezpiecznie, jeżeli będziemy na 100% pewni, że nikt nie będzie modyfikować tego kontenera. Gdyby ktoś dodał kolejny element i musiałaby zajść realokacja, to nasz wskaźnik przestanie wskazywać na nasze dane. Jednakże w takich przypadkach o wiele lepiej użyć mapy, czy też listy.
-
-Drugi ważny aspekt, kontener sam automatycznie nie zmniejsza swojej wielkości, musimy wywoływać to sami ręcznie.
-
-```cpp
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-void printSizeAndCapacity(const vector<int> &v) {
-    cout << "Size:  " << v.size() << "\t\tCapacity: " << v.capacity() << endl;
-}
- 
-int main()
-{
-    vector<int> v;
-    printSizeAndCapacity(v);
-
-    v.resize(150);
-    printSizeAndCapacity(v);
-
-    v.resize(50);
-    printSizeAndCapacity(v);
-}
-```
-
 {{< space 5 >}}
 
-# Mierzenie czasu
+## Mierzenie czasu
 
 Może się zdarzyć sytuacja, gdzie chcemy po prostu mierzyć czas, albo chcemy poeksperymentować i dowiedzieć się, jak szybko działa nasz kod. Możemy tego dokonać na kilka sposobów. Możemy mierzyć czas w stylu języka C, albo szukać bibliotek systemowych. Możemy próbować używać środowisk programistycznych i trybu debugowania. Jednakże c++ daje nam możliwość skorzystania z biblioteki, która jest uniwersalna pomiędzy różnymi systemami. Biblioteki `chrono`.
 
@@ -202,13 +90,13 @@ Najlepiej w tym przypadku używać uruchamiania bez debugowania, aby wyeliminowa
 
 {{< space 7 >}}
 
-# Uzupełnienie względem biblioteki standardowej
+## Uzupełnienie względem biblioteki standardowej
 
 Bardzo często funkcjonalności udostępniane w nowszych wersjach c++ są dostępne dla starszych w bibliotece `boost`.
 
 {{< space 7 >}}
 
-# Parametry uruchomienia programu
+## Parametry uruchomienia programu
 
 Istnieje prawdopodobieństwo, że temat był wcześniej poruszany. Jeżeli tak było to będzie tylko przypomnienie informacji.
 
@@ -244,52 +132,26 @@ Możemy zauważyć, że pierwszym przekazanym argumentem jest nazwa naszego prog
 
 {{< space 5 >}}
 
-# Dokumentacja doxygen
-
-Przed rozpoczęciem omawiania zagadnienia, pochylmy się nad ustawieniami Visual Studio. Należy zmienić styl generowanych komentarzy do dokumentacji z domyślnie ustawionego na XML na doxygen. Obojętne, która wersja, osobiście preferuję `/**`.
-
-![Ustawienia Visual studio - doxygen](/imgJipp/Doxygen.png)
-
-**Czym jest doxygen?** {{< br >}}
-Jest to generator dokumentacji na podstawie specjalnych komentarzy zawartych w kodzie. Obsługuje on między innymi takie języki jak C, C++, Java, Python oraz częściowo PHP, C#.
-
-**Co daje pisanie dokumentacji w takiej formie?** {{< br >}}
-Pierwszym zasadniczym plusem jest możliwość łatwego doprecyzowania, co dana funkcja robi, dodania opisów do przekazywanych parametrów (nazwy nie zawsze są wystarczające) oraz co będzie zwracane. Środowiska programistyczne często wspierają dokumentację napisaną w takim formacie i przy wywołaniu danej funkcji oraz najechaniu na nią myszką dostajemy jej podgląd. Dodatkowo można ją wyeksportować do takich formatów jak: pdf, html, LaTeX.
-
-![Podgląd podpowiedzi będącą wycinkiem dokumentacji](/imgJipp/doxygen%20VS.png)
-
-Na zajęciach nie będziemy się zajmować generowaniem dokumentacji, jedynie jej tworzeniem. Informacje o jej generowaniu można znaleźć na [stronie projektu](https://www.doxygen.nl/manual/index.html).
-
-[Przykładowa dokumentacja wygenerowana doxygenem.](https://xerces.apache.org/xerces-c/apiDocs-3/classes.html)
-
-[JsonCpp Documentation](https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
-
-{{< space 5 >}}
-
-## Tworzenie dokumentacji
-
-Ogromnym plusem dokumentacji doxygen jest ogromna łatwość jej tworzenia. Wystarczy napisać deklarację funkcji, którą chcemy stworzyć, a następnie wejść do linii nad nią i wpisać `/**`, większość środowisk programistycznych rozpozna i wygeneruje odpowiednie linie. Jednakże prześledźmy kilka najważniejszych:
-
-* `@brief` - opis funkcji, można także pisać opis bez używania tego słowa kluczowego
-* `@param <nazwa_parametru>` - opis parametru nazw_parametru
-* `@return` - opis wartości zwracanej
-
-```cpp
-/**
- * @brief This is my function and I don't know what it's doing
- * @param charlie number of charlie lamp
- * @param name full name of charlie lamp
- * @return number of charlie lamp
-*/
-int myFunction(int charlie, string name) {
-
-}
-```
-
-{{< space 5 >}}
-
-# Statyczna analiza kodu
+## Statyczna analiza kodu
 
 Jak pisać kod lepiej? Czy zrobiłem jakieś dziwne błędy w kodzie? Można się tego dowiedzieć, używając odpowiednich narzędzi do statycznej analizy kodu, które będą podpowiadać, jak nasz kod ulepszyć. Są one często zintegrowane ze środowiskami programistycznymi, wyświetlając różne ostrzeżenia. Możemy też sami uruchomić taką analizę, należy tylko uważać, jakie testy uruchamiamy.
 
 Przykładem takiego narzędzia jest [`clang-tidy`](https://clang.llvm.org/extra/clang-tidy/). Jest on domyślnie wbudowany w CLion, co niestety spowalnia jego działanie, jednakże daje ogromne możliwości pisania lepszego i bardziej poprawnego kodu. Oczywiście należy uważać, ponieważ nie wszystkie poprawki będą "poprawne".
+
+{{< space 5 >}}
+
+## Formatowanie kodu
+
+Istnieje kilka styli formatowania kodu jednak to do użytkownika/projektu należy decyzja, jak kod ma być wystylowany. Aby podczas współpracy wielu osób mieć podobne formatowanie kodu można używać narzędzia `clang-fromat` i dodać do projektu plik konfiguracyjny `.clnag-format`, który będzie przechowywał reguły według, których kod ma zostać sformatowany.
+
+Przeanalizuj możliwości dostosowania kodu pod własne preferencje oraz na jakie rzeczy należy zwracać uwagę na przykładzie [narzędzia do generowanioa plików konfiguracyjnych](https://clang-format-configurator.site/)
+
+{{< space 5 >}}
+
+## Zadania biblioteka STL
+
+1. Wygeneruj tablicę wypełnioną losowymi liczbami.
+2. Posortuj wygenerowaną tablicę za pomocą funkcji [sort z biblioteki standardowej](https://en.cppreference.com/w/cpp/algorithm/sort.html?ref=leetsolve.com). Zmierz czas tej operacji.
+3. Wykonaj zadanie 2, ale przekaż jako pierwszy parametr: `std::execution::par`. Porównaj czas wcześniejszego sortowania z następnym.
+4. Przetestuj [ranges::sort](https://en.cppreference.com/w/cpp/algorithm/ranges/sort.html) (c++20). Czym się różni od wcześniejszej funkcji?
+5. Przemnóż każdą wartość z zadania pierwszego przez średnią wszystkich wartości w tablicy podzieloną przez 10. Wszystkie operacje wykonaj za pomocą funkcji z biblioteki standardowej.
