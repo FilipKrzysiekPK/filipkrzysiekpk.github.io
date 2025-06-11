@@ -10,7 +10,7 @@ menu:
             icon: graduation-cap
 categories:
     - pages
-lastmod: 2025-03-09T16:11:06.659Z
+lastmod: 2025-06-11T10:41:44.163Z
 ---
 
 # Dydaktyka
@@ -21,4 +21,4 @@ lastmod: 2025-03-09T16:11:06.659Z
 
 ## Simple Exam Browser
 
-[Pobierz](https://ii.pk.edu.pl/~kswaldek/media/files/SimpleExamBrowser.zip)
+[Pobierz](/SimpleExamBrowser.zip)
